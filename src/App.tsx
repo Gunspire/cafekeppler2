@@ -6,6 +6,7 @@ import Intro from "./components/Intro";
 import Bakery from "./components/Bakery";
 import MenuPreview from "./components/MenuPreview";
 import Banner from "./components/Banner";
+import Reviews from "./components/Reviews";
 import Info from "./components/Info";
 import Footer from "./components/Footer";
 
@@ -21,6 +22,7 @@ export default function App() {
       <Bakery />
       <Banner />
       <MenuPreview />
+      <Reviews />
       <Info />
       <Footer />
     </main>

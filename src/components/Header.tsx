@@ -8,7 +8,6 @@ export default function Header() {
           <a href="/" className="header__logo" aria-label="Café Keppler">
             <img src="/logo-header.png" alt="" />
           </a>
-          <div className="header__meta">Van der Pekstraat 1 · Amsterdam-Noord</div>
         </div>
 
         <div className="header__right">

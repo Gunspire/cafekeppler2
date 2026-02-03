@@ -1,29 +1,22 @@
 import React from "react";
-import Splash from "./components/Splash";
 import Header from "./components/Header";
-import Hero from "./components/Hero";
-import Intro from "./components/Intro";
-import Bakery from "./components/Bakery";
-import MenuPreview from "./components/MenuPreview";
-import Banner from "./components/Banner";
-import Reviews from "./components/Reviews";
-import Info from "./components/Info";
+import { Route, Routes, useLocation } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import GroepenPage from "./pages/GroepenPage";
+import ContactPage from "./pages/ContactPage";
 import Footer from "./components/Footer";
 
 export default function App() {
-  const [showSplash, setShowSplash] = React.useState(true);
+  const location = useLocation();
 
   return (
     <main>
-      {showSplash ? <Splash onDone={() => setShowSplash(false)} /> : null}
       <Header />
-      <Hero />
-      <Intro />
-      <Bakery />
-      <Banner />
-      <MenuPreview />
-      <Reviews />
-      <Info />
+      <Routes location={location}>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/groepen" element={<GroepenPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+      </Routes>
       <Footer />
     </main>
   );

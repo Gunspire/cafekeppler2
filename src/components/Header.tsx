@@ -1,13 +1,20 @@
 import React from "react";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Header() {
+  const location = useLocation();
+  const homePrefix = location.pathname === "/" ? "" : "/";
+
   return (
     <header className="header">
       <div className="header__inner">
         <div className="header__left">
-          <a href="/" className="header__logo" aria-label="Café Keppler">
+          <Link to="/" className="header__logo" aria-label="Café Keppler">
             <img src="/logo-header.png" alt="" />
-          </a>
+          </Link>
+          <Link to="/" className="header__brand" aria-label="Café Keppler home">
+            Café Keppler
+          </Link>
         </div>
 
         <div className="header__right">
@@ -19,25 +26,17 @@ export default function Header() {
             >
               Menu
             </a>
-            <a href="#about">Lokaal</a>
-            <a href="#bakery">Bakkerij</a>
-            <a href="#contact">Contact</a>
+            <a href={`${homePrefix}#actueel`}>Actueel</a>
+            <a href={`${homePrefix}#about`}>Lokaal</a>
+            <a href={`${homePrefix}#bakery`}>Bakkerij</a>
           </nav>
           <div className="header__actions">
-            <a
-              href="/Cafe_Keppler_menu_mei_2025.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn--header"
-            >
-              Bekijk menu
-            </a>
-            <a
-              href="mailto:info@cafekeppler.nl?subject=Reservering%20Caf%C3%A9%20Keppler&body=Hoi%20Caf%C3%A9%20Keppler%2C%0A%0AIk%20wil%20graag%20reserveren%3A%0A%0ADatum%3A%20%0ATijd%3A%20%0AAantal%20personen%3A%20%0ANaam%3A%20%0ATelefoon%3A%20%0A%0AOpmerking%20(optioneel)%3A%20%0A%0ADankjewel!"
-              className="btn btn--header-secondary"
-            >
-              Reserveren
-            </a>
+            <Link to="/groepen" className="btn btn--header">
+              Groepen
+            </Link>
+            <Link to="/contact" className="btn btn--header-secondary">
+              Contact
+            </Link>
           </div>
         </div>
       </div>

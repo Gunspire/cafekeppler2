@@ -10,10 +10,7 @@ export default function Header() {
       <div className="header__inner">
         <div className="header__left">
           <Link to="/" className="header__logo" aria-label="Café Keppler">
-            <img src="/logo-header.png" alt="" />
-          </Link>
-          <Link to="/" className="header__brand" aria-label="Café Keppler home">
-            Café Keppler
+            <img src="/logo.webp" alt="Café Keppler" />
           </Link>
         </div>
 
@@ -27,8 +24,9 @@ export default function Header() {
               Menu
             </a>
             <a href={`${homePrefix}#actueel`}>Actueel</a>
-            <a href={`${homePrefix}#about`}>Lokaal</a>
-            <a href={`${homePrefix}#bakery`}>Bakkerij</a>
+            <Link to="/lokaal">Lokaal</Link>
+            <Link to="/bakkerij">Bakkerij</Link>
+            <Link to="/werken-bij">Werken bij</Link>
           </nav>
           <div className="header__actions">
             <Link to="/groepen" className="btn btn--header">

@@ -1,13 +1,46 @@
-import React from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 export default function Hero() {
+  const slides = useMemo(
+    () => [
+      { src: "/hero-2.jpeg", alt: "Café Keppler sfeer (avond)" },
+      {
+        src: "/Generated Image February 04, 2026 - 1_08PM.jpeg",
+        alt: "Café Keppler terras sfeer",
+      },
+      { src: "/01-misset-cafe-keppler-9049.jpg", alt: "Café Keppler sfeer" },
+    ],
+    [],
+  );
+
+  const [activeIdx, setActiveIdx] = useState(0);
+
+  useEffect(() => {
+    const reduceMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+    if (reduceMotion) return;
+
+    const id = window.setInterval(() => {
+      setActiveIdx((i) => (i + 1) % slides.length);
+    }, 5000);
+
+    return () => window.clearInterval(id);
+  }, [slides.length]);
+
   return (
     <section className="hero">
       <div className="hero__bg">
-        <img
-          src="/01-misset-cafe-keppler-9049.jpg"
-          alt="Café Keppler sfeer"
-        />
+        {slides.map((s, idx) => (
+          <img
+            key={s.src}
+            src={s.src}
+            alt={s.alt}
+            className={idx === activeIdx ? "hero__bgImg is-active" : "hero__bgImg"}
+            loading={idx === 0 ? "eager" : "lazy"}
+            decoding="async"
+          />
+        ))}
       </div>
       <div className="hero__overlay"></div>
 

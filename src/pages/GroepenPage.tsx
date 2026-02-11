@@ -86,7 +86,7 @@ export default function GroepenPage() {
       <section className="page-hero" aria-label="Groepen">
         <div className="page-hero__bg" aria-hidden="true">
           <img
-            src="/cafe-keppler-wil-voor-import-en.jpg"
+            src="/hero-2.jpeg"
             alt=""
             className="page-hero__img"
           />

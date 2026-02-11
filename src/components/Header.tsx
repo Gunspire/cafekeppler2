@@ -1,10 +1,7 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Header() {
-  const location = useLocation();
-  const homePrefix = location.pathname === "/" ? "" : "/";
-
   return (
     <header className="header">
       <div className="header__inner">
@@ -23,7 +20,7 @@ export default function Header() {
             >
               Menu
             </a>
-            <a href={`${homePrefix}#actueel`}>Actueel</a>
+            <Link to="/actueel">Actueel</Link>
             <Link to="/lokaal">Lokaal</Link>
             <Link to="/bakkerij">Bakkerij</Link>
             <Link to="/werken-bij">Werken bij</Link>

@@ -46,7 +46,7 @@ export default function ActueelDetailPage() {
             <time dateTime={item.date}>{formatNl(item.date)}</time>
           </p>
           <div className="actueel-hero__actions">
-            <Link className="btn btn--secondary-hero" to="/#actueel">
+            <Link className="btn btn--secondary-hero" to="/actueel">
               ← Terug naar overzicht
             </Link>
             <Link className="btn btn--primary" to="/contact">

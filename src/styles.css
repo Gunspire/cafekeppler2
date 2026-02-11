@@ -79,19 +79,19 @@ a {
   color: var(--text);
   opacity: 0;
   transform: translateY(6px);
-  transition: opacity 520ms ease, transform 520ms ease;
-  transition-delay: 380ms;
+  transition: opacity 338ms ease, transform 338ms ease;
+  transition-delay: 247ms;
   font-size: clamp(44px, 6.2vw, 86px);
   letter-spacing: -0.03em;
   line-height: 1;
 }
 
 .splash--play .splash__logo--left {
-  animation: splash-left 1300ms ease forwards;
+  animation: splash-left 845ms ease forwards;
 }
 
 .splash--play .splash__logo--right {
-  animation: splash-right 1300ms ease forwards;
+  animation: splash-right 845ms ease forwards;
 }
 
 .splash--play .splash__wordmark {
@@ -100,8 +100,8 @@ a {
 }
 
 .splash--play {
-  animation: splash-fade 700ms ease forwards;
-  animation-delay: 2100ms;
+  animation: splash-fade 455ms ease forwards;
+  animation-delay: 1365ms;
 }
 
 @keyframes splash-left {
@@ -141,8 +141,8 @@ a {
   }
 
   .splash--play {
-    animation: splash-fade 220ms ease forwards !important;
-    animation-delay: 700ms !important;
+    animation: splash-fade 140ms ease forwards !important;
+    animation-delay: 455ms !important;
   }
 
 }
@@ -1243,6 +1243,10 @@ a {
   margin: 0 auto;
 }
 
+.events--page .events__header {
+  margin-bottom: 18px;
+}
+
 .events__header {
   display: flex;
   align-items: baseline;
@@ -1994,11 +1998,68 @@ a {
 
 /* Footer */
 .footer {
+  position: relative;
+  overflow: hidden;
   padding: 56px var(--gutter) 34px;
   border-top: 1px solid var(--border);
 }
 
+.footer__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.footer__bgWall {
+  position: absolute;
+  inset: -40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: space-around;
+  gap: clamp(34px, 5vw, 90px);
+  opacity: 0.36;
+  transform: translate3d(0, 84px, 0) rotate(-6deg);
+}
+
+.footer__bgLogo {
+  /* Keep them big, but ensure multiple fit on screen (>= ~4 visible) */
+  width: clamp(140px, 18vw, 240px);
+  height: auto;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+  filter: saturate(0.95);
+  mix-blend-mode: multiply;
+  opacity: 1;
+}
+
+.footer__bgLogo--a {
+  transform: rotate(4deg);
+}
+.footer__bgLogo--b {
+  transform: rotate(-3deg);
+}
+.footer__bgLogo--c {
+  transform: rotate(2deg);
+}
+
+.footer__bgFade {
+  position: absolute;
+  inset: 0;
+  /* No fade-away at the bottom; just a gentle wash for readability */
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--bg) 58%, transparent) 0%,
+    color-mix(in srgb, var(--bg) 34%, transparent) 55%,
+    color-mix(in srgb, var(--bg) 34%, transparent) 100%
+  );
+}
+
 .footer__inner {
+  position: relative;
+  z-index: 1;
   max-width: var(--max);
   margin: 0 auto;
 }

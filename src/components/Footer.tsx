@@ -4,6 +4,18 @@ import { Link } from "react-router-dom";
 export default function Footer() {
   return (
     <footer className="footer">
+      <div className="footer__bg" aria-hidden="true">
+        <div className="footer__bgWall">
+          {Array.from({ length: 10 }).map((_, i) => (
+            <React.Fragment key={i}>
+              <img className="footer__bgLogo footer__bgLogo--a" src="/logotjes/image%20(1).png" alt="" />
+              <img className="footer__bgLogo footer__bgLogo--b" src="/logotjes/logo-graphic.png" alt="" />
+              <img className="footer__bgLogo footer__bgLogo--c" src="/logotjes/logo-header.png" alt="" />
+            </React.Fragment>
+          ))}
+        </div>
+        <div className="footer__bgFade" />
+      </div>
       <div className="footer__inner">
         <div className="footer__grid">
           <div className="footer__brand">

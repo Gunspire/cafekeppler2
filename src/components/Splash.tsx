@@ -14,7 +14,7 @@ export default function Splash({ onDone }: SplashProps) {
     const raf = requestAnimationFrame(() => setPlay(true));
 
     // Total duration should match CSS animation timeline.
-    const totalMs = 2800;
+    const totalMs = 1820;
     const t = window.setTimeout(onDone, totalMs);
 
     return () => {

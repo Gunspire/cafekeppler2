@@ -2024,7 +2024,7 @@ a {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 14px 14px 0 14px;
+  padding: 10px 12px 0 12px;
 }
 
 .dinnerDrawerPanel__eyebrow {
@@ -2040,7 +2040,7 @@ a {
 }
 
 .dinnerDrawerPanel__title {
-  padding: 10px 14px 0 14px;
+  padding: 6px 12px 0 12px;
   font-family: ui-sans-serif, system-ui, sans-serif;
   font-size: 18px;
   font-weight: 850;
@@ -2048,7 +2048,7 @@ a {
 }
 
 .dinnerDrawerPanel__text {
-  padding: 10px 14px 0 14px;
+  padding: 8px 12px 0 12px;
   color: color-mix(in srgb, var(--text) 82%, transparent);
   font-family: ui-sans-serif, system-ui, sans-serif;
   font-size: 14px;
@@ -2057,7 +2057,7 @@ a {
 }
 
 .dinnerDrawerPanel__actions {
-  padding: 12px 14px 16px 14px;
+  padding: 10px 12px 12px 12px;
   display: flex;
   gap: 10px;
   align-items: center;

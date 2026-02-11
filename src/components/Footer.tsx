@@ -22,7 +22,7 @@ export default function Footer() {
             <div className="footer__brandTop">
               <img
                 className="footer__mark"
-                src="/logo-header.png"
+                src="/logotjes/logo-header.png"
                 alt=""
                 aria-hidden="true"
                 loading="lazy"

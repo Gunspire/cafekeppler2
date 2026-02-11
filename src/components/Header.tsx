@@ -1,9 +1,30 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Header() {
+  const location = useLocation();
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    setMobileOpen(false);
+  }, [location.pathname]);
+
+  React.useEffect(() => {
+    if (!mobileOpen) return;
+    const prev = document.documentElement.style.overflow;
+    document.documentElement.style.overflow = "hidden";
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMobileOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      document.documentElement.style.overflow = prev;
+    };
+  }, [mobileOpen]);
+
   return (
-    <header className="header">
+    <header className={mobileOpen ? "header header--open" : "header"}>
       <div className="header__inner">
         <div className="header__left">
           <Link to="/" className="header__logo" aria-label="Café Keppler">
@@ -32,6 +53,59 @@ export default function Header() {
             <Link to="/contact" className="btn btn--header-secondary">
               Contact
             </Link>
+            <button
+              type="button"
+              className="header__burger"
+              onClick={() => setMobileOpen((v) => !v)}
+              aria-label={mobileOpen ? "Menu sluiten" : "Menu openen"}
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-menu"
+            >
+              <span className="header__burgerIcon" aria-hidden="true" />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        className={mobileOpen ? "header__mobile is-open" : "header__mobile"}
+        aria-hidden={!mobileOpen}
+      >
+        <button
+          type="button"
+          className="header__backdrop"
+          aria-label="Sluit menu"
+          onClick={() => setMobileOpen(false)}
+          tabIndex={mobileOpen ? 0 : -1}
+        />
+        <div className="header__drawer" role="dialog" aria-modal="true" id="mobile-menu">
+          <div className="header__drawerTop">
+            <div className="header__drawerTitle">Menu</div>
+            <button
+              type="button"
+              className="header__drawerClose"
+              onClick={() => setMobileOpen(false)}
+              aria-label="Sluiten"
+            >
+              Sluiten
+            </button>
+          </div>
+
+          <div className="header__drawerLinks">
+            <a
+              href="/Cafe_Keppler_menu_mei_2025.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMobileOpen(false)}
+            >
+              Menu (PDF)
+            </a>
+            <Link to="/actueel">Actueel</Link>
+            <Link to="/lokaal">Lokaal</Link>
+            <Link to="/bakkerij">Bakkerij</Link>
+            <Link to="/werken-bij">Werken bij</Link>
+            <Link to="/groepen">Groepen</Link>
+            <Link to="/contact">Contact</Link>
           </div>
         </div>
       </div>

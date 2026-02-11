@@ -353,7 +353,7 @@ a {
     transition: transform 260ms ease;
     padding: 16px;
     display: grid;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: auto 1fr auto;
     gap: 14px;
     visibility: hidden;
   }
@@ -391,16 +391,72 @@ a {
 
   .header__drawerLinks {
     display: grid;
-    gap: 10px;
+    gap: 0;
     font-family: ui-sans-serif, system-ui, sans-serif;
     font-size: 15px;
   }
 
   .header__drawerLinks a {
-    padding: 12px 12px;
-    border-radius: 12px;
-    border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
-    background: color-mix(in srgb, var(--bg) 94%, #fff);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 6px;
+    border-radius: 0;
+    border: 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+    background: transparent;
+    color: color-mix(in srgb, var(--text) 86%, transparent);
+    transition: background 0.18s ease, color 0.18s ease;
+  }
+
+  .header__drawerLinks a:active {
+    background: color-mix(in srgb, var(--text) 7%, transparent);
+  }
+
+  .header__drawerLinks a:hover {
+    background: color-mix(in srgb, var(--text) 5%, transparent);
+    color: var(--text);
+  }
+
+  .header__drawerLinks a + a {
+    margin-top: 0;
+  }
+
+  .header__drawerLinks a::after {
+    content: "→";
+    font-weight: 800;
+    color: color-mix(in srgb, var(--text) 60%, transparent);
+    flex: 0 0 auto;
+  }
+
+  .header__drawerFooter {
+    border-top: 1px solid var(--border);
+    padding-top: 14px;
+    display: grid;
+    gap: 10px;
+  }
+
+  .header__drawerAddress {
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: 13px;
+    line-height: 1.55;
+    color: color-mix(in srgb, var(--text) 74%, transparent);
+  }
+
+  .header__drawerRoute {
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: 13px;
+    font-weight: 750;
+    color: var(--accent);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    width: fit-content;
+    padding: 10px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: transparent;
   }
 }
 

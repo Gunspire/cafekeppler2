@@ -13,6 +13,17 @@ export default function Header() {
     if (!mobileOpen) return;
     const prev = document.documentElement.style.overflow;
     document.documentElement.style.overflow = "hidden";
+    // Ensure dinner drawer never overlaps the mobile menu
+    try {
+      window.dispatchEvent(new Event("keppler:dinner:close"));
+    } catch {
+      // ignore
+    }
+    try {
+      window.dispatchEvent(new CustomEvent("keppler:mobilemenu", { detail: { open: true } }));
+    } catch {
+      // ignore
+    }
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") setMobileOpen(false);
     };
@@ -20,6 +31,13 @@ export default function Header() {
     return () => {
       window.removeEventListener("keydown", onKeyDown);
       document.documentElement.style.overflow = prev;
+      try {
+        window.dispatchEvent(
+          new CustomEvent("keppler:mobilemenu", { detail: { open: false } }),
+        );
+      } catch {
+        // ignore
+      }
     };
   }, [mobileOpen]);
 
@@ -56,7 +74,20 @@ export default function Header() {
             <button
               type="button"
               className="header__burger"
-              onClick={() => setMobileOpen((v) => !v)}
+              onClick={() =>
+                setMobileOpen((v) => {
+                  const next = !v;
+                  if (next) {
+                    // Ensure dinner drawer doesn't overlap mobile menu
+                    try {
+                      window.dispatchEvent(new Event("keppler:dinner:close"));
+                    } catch {
+                      // ignore
+                    }
+                  }
+                  return next;
+                })
+              }
               aria-label={mobileOpen ? "Menu sluiten" : "Menu openen"}
               aria-expanded={mobileOpen}
               aria-controls="mobile-menu"
@@ -106,6 +137,22 @@ export default function Header() {
             <Link to="/werken-bij">Werken bij</Link>
             <Link to="/groepen">Groepen</Link>
             <Link to="/contact">Contact</Link>
+          </div>
+
+          <div className="header__drawerFooter">
+            <div className="header__drawerAddress">
+              Van der Pekstraat 1<br />
+              1031 CN Amsterdam
+            </div>
+            <a
+              className="header__drawerRoute"
+              href="https://www.google.com/maps?q=Van%20der%20Pekstraat%201%201031%20CN%20Amsterdam"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMobileOpen(false)}
+            >
+              Route in Google Maps
+            </a>
           </div>
         </div>
       </div>

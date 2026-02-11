@@ -25,6 +25,9 @@ export default function DinnerNotice() {
   const initialState = React.useMemo(() => getInitialState(), []);
   const openedByUserRef = React.useRef(false);
   const [state, setState] = React.useState<NoticeState>(initialState);
+  const homeAutoOpenTRef = React.useRef<number | null>(null);
+  const homeAutoCloseTRef = React.useRef<number | null>(null);
+  const [hiddenByMobileMenu, setHiddenByMobileMenu] = React.useState(false);
 
   const reduceMotion =
     typeof window !== "undefined" &&
@@ -64,9 +67,14 @@ export default function DinnerNotice() {
       if (!openedByUserRef.current) setState("minimized");
     }, 6000 + 5000);
 
+    homeAutoOpenTRef.current = openT;
+    homeAutoCloseTRef.current = closeT;
+
     return () => {
       window.clearTimeout(openT);
       window.clearTimeout(closeT);
+      if (homeAutoOpenTRef.current === openT) homeAutoOpenTRef.current = null;
+      if (homeAutoCloseTRef.current === closeT) homeAutoCloseTRef.current = null;
     };
   }, [location.pathname, reduceMotion]);
 
@@ -80,15 +88,53 @@ export default function DinnerNotice() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [state]);
 
+  // Allow other UI (e.g. mobile burger menu) to close this drawer.
+  React.useEffect(() => {
+    const clearHomeTimers = () => {
+      if (homeAutoOpenTRef.current) window.clearTimeout(homeAutoOpenTRef.current);
+      if (homeAutoCloseTRef.current) window.clearTimeout(homeAutoCloseTRef.current);
+      homeAutoOpenTRef.current = null;
+      homeAutoCloseTRef.current = null;
+    };
+
+    const onClose = () => {
+      clearHomeTimers();
+      setState("minimized");
+    };
+
+    window.addEventListener("keppler:dinner:close" as any, onClose as any);
+    return () =>
+      window.removeEventListener("keppler:dinner:close" as any, onClose as any);
+  }, []);
+
+  // Hide the outer toggle while the mobile burger menu is open.
+  React.useEffect(() => {
+    const onMobileMenu = (e: any) => {
+      const open = Boolean(e?.detail?.open);
+      setHiddenByMobileMenu(open);
+      if (open) setState("minimized");
+    };
+    window.addEventListener("keppler:mobilemenu" as any, onMobileMenu as any);
+    return () => window.removeEventListener("keppler:mobilemenu" as any, onMobileMenu as any);
+  }, []);
+
   const isOpen = state === "open";
 
   return (
     <>
       <button
         type="button"
-        className={isOpen ? "dinnerDrawerToggle dinnerDrawerToggle--outer is-hidden" : "dinnerDrawerToggle dinnerDrawerToggle--outer"}
+        className={
+          isOpen || hiddenByMobileMenu
+            ? "dinnerDrawerToggle dinnerDrawerToggle--outer is-hidden"
+            : "dinnerDrawerToggle dinnerDrawerToggle--outer"
+        }
         onClick={() => {
           openedByUserRef.current = true;
+          if (homeAutoOpenTRef.current) window.clearTimeout(homeAutoOpenTRef.current);
+          if (homeAutoCloseTRef.current) window.clearTimeout(homeAutoCloseTRef.current);
+          homeAutoOpenTRef.current = null;
+          homeAutoCloseTRef.current = null;
           setState("open");
         }}
         aria-label="Diner-melding openen"
@@ -116,6 +162,10 @@ export default function DinnerNotice() {
             className="dinnerDrawerToggle dinnerDrawerToggle--inner"
             onClick={() => {
               openedByUserRef.current = true;
+              if (homeAutoOpenTRef.current) window.clearTimeout(homeAutoOpenTRef.current);
+              if (homeAutoCloseTRef.current) window.clearTimeout(homeAutoCloseTRef.current);
+              homeAutoOpenTRef.current = null;
+              homeAutoCloseTRef.current = null;
               setState("minimized");
             }}
             aria-label="Diner-melding sluiten"

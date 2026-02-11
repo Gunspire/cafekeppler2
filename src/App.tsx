@@ -9,6 +9,7 @@ import ActueelPage from "./pages/ActueelPage";
 import WerkenBijPage from "./pages/WerkenBijPage";
 import LokaalPage from "./pages/LokaalPage";
 import BakkerijPage from "./pages/BakkerijPage";
+import DinnerNotice from "./components/DinnerNotice";
 import Footer from "./components/Footer";
 
 export default function App() {
@@ -17,6 +18,7 @@ export default function App() {
   return (
     <main>
       <Header />
+      <DinnerNotice />
       <Routes location={location}>
         <Route path="/" element={<HomePage />} />
         <Route path="/groepen" element={<GroepenPage />} />

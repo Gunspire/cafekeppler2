@@ -1117,6 +1117,13 @@ a {
   color: #fff6e6;
 }
 
+.hero__actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
 /* Hero Specific Overrides */
 .hero__eyebrow {
   justify-content: center;
@@ -2218,6 +2225,11 @@ a {
     white-space: normal;
   }
 
+  .hero__text {
+    font-size: 18px;
+    margin-bottom: 28px;
+  }
+
   .header__right {
     gap: 12px;
   }
@@ -2236,5 +2248,54 @@ a {
 
   .info__map {
     height: 320px;
+  }
+
+  .info__card {
+    padding: 22px;
+  }
+
+  .info__inner {
+    gap: 18px;
+    margin-bottom: 34px;
+  }
+
+  .menu-card__header {
+    padding: 18px 18px 14px;
+  }
+
+  .menu-card__body {
+    padding: 14px 14px 16px;
+  }
+
+  .menu-card__tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 6px;
+  }
+
+  .menu-tab {
+    white-space: nowrap;
+    flex: 0 0 auto;
+  }
+
+  .menu-row__title {
+    font-size: 16px;
+  }
+
+  .menu-row__price {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 420px) {
+  .header__inner {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .header__right {
+    width: 100%;
+    justify-content: flex-end;
   }
 }

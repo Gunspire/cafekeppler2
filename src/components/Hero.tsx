@@ -50,11 +50,16 @@ export default function Hero() {
         <p className="hero__text">
           Een plek om te landen, te proeven en te genieten. Van vroege espresso tot late borrel.
         </p>
-        <div style={{ display: "flex", gap: "12px", justifyContent: "center" }}>
+        <div className="hero__actions">
           <a href="#visit" className="btn btn--primary">
             Kom langs
           </a>
-          <a href="/Cafe_Keppler_menu_mei_2025.pdf" target="_blank" rel="noopener noreferrer" className="btn btn--secondary-hero">
+          <a
+            href="/Cafe_Keppler_menu_mei_2025.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn--secondary-hero"
+          >
             Menu
           </a>
         </div>

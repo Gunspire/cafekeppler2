@@ -287,16 +287,41 @@ a {
     display: inline-flex;
   }
 
+  /* Keep header single-row on mobile */
+  .header__inner {
+    padding: 10px var(--gutter);
+    flex-wrap: nowrap;
+  }
+
+  .header__logo img {
+    height: 38px;
+  }
+
+  .header__right {
+    gap: 10px;
+  }
+
+  /* Move action buttons into the drawer */
+  .header__actions .btn--header,
+  .header__actions .btn--header-secondary {
+    display: none;
+  }
+
   .header__mobile {
     display: block;
     position: fixed;
     inset: 0;
     z-index: 1700;
     pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 220ms ease;
   }
 
   .header__mobile.is-open {
     pointer-events: auto;
+    opacity: 1;
+    visibility: visible;
   }
 
   .header__backdrop {
@@ -307,6 +332,12 @@ a {
     padding: 0;
     margin: 0;
     cursor: pointer;
+    opacity: 0;
+    transition: opacity 220ms ease;
+  }
+
+  .header__mobile.is-open .header__backdrop {
+    opacity: 1;
   }
 
   .header__drawer {
@@ -324,10 +355,12 @@ a {
     display: grid;
     grid-template-rows: auto 1fr;
     gap: 14px;
+    visibility: hidden;
   }
 
   .header__mobile.is-open .header__drawer {
     transform: translateX(0);
+    visibility: visible;
   }
 
   .header__drawerTop {
@@ -2221,8 +2254,8 @@ a {
     height: 48px;
   }
   .dinnerDrawerToggle__logo {
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
   }
   .dinnerDrawerPanel {
     transform: translate(100%, -50%);
@@ -2420,13 +2453,8 @@ a {
 }
 
 @media (max-width: 420px) {
-  .header__inner {
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-
-  .header__right {
-    width: 100%;
-    justify-content: flex-end;
+  /* Prevent “two-layer” header look on very small screens */
+  .header__logo img {
+    height: 36px;
   }
 }

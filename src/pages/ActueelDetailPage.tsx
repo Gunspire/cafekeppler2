@@ -38,12 +38,21 @@ export default function ActueelDetailPage() {
             decoding="async"
           />
         </div>
+        {item.ribbon ? (
+          <div className="cornerRibbon cornerRibbon--hero">
+            <div className="cornerRibbon__label">{item.ribbon}</div>
+          </div>
+        ) : null}
         <div className="page-hero__overlay" />
         <div className="page-hero__content">
           <div className="eyebrow page-hero__eyebrow">Actueel</div>
           <h1 className="page-hero__title">{item.title}</h1>
           <p className="page-hero__text">
-            <time dateTime={item.date}>{formatNl(item.date)}</time>
+            {item.date ? (
+              <time dateTime={item.date}>{item.dateLabel ?? formatNl(item.date)}</time>
+            ) : (
+              <span>{item.dateLabel ?? ""}</span>
+            )}
           </p>
           <div className="actueel-hero__actions">
             <Link className="btn btn--secondary-hero" to="/actueel">

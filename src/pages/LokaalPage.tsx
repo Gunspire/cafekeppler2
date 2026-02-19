@@ -2,61 +2,158 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 type LocalPartner = {
+  category: string;
   title: string;
   subtitle: string;
-  imageSrc: string;
-  imageAlt: string;
+  imageSrc?: string;
+  imageAlt?: string;
   imagePosition?: string;
   story: string;
   highlights: string[];
+  links?: Array<{ href: string; label: string }>;
 };
 
 const LOCAL_PARTNERS: LocalPartner[] = [
   {
-    title: "Zuivel uit de buurt",
-    subtitle: "Voor cappuccino’s, yoghurt en boter",
-    imageSrc: "/cafe-keppler-koffiebar-amsterdam.jpg",
-    imageAlt: "Koffiebar bij Café Keppler",
+    category: "Koffie",
+    title: "Koffie van Kees",
+    subtitle: "Espresso & filter — ook te koop als bonen (of gemalen)",
     story:
-      "Goede melk maakt het verschil. Daarom kiezen we voor zuivel van dichtbij — vers, eerlijk en met aandacht geproduceerd. Zo proef je in elke koffie dezelfde romige kwaliteit.",
-    highlights: ["Melk voor espresso-dranken", "Yoghurt & room", "Roomboter op brood"],
+      "Voorheen waren we samen, maar nu kopen we via Kees zijn koffie in: Koffie van Kees. Bijzonder: een aantal soorten zijn ook te koop — als bonen, maar we kunnen ze ook voor je malen.",
+    highlights: [
+      "Espresso: Noord-blend, Zuid-blend, Sumatra en Peru",
+      "Filter: Noord-blend en Panama",
+    ],
+    links: [{ href: "https://www.koffievankees.nl/", label: "koffievankees.nl" }],
   },
   {
-    title: "Groenten & kruiden van het seizoen",
-    subtitle: "Vers, simpel, precies op z’n best",
-    imageSrc: "/intro-food.png",
-    imageAlt: "Verse ingrediënten",
+    category: "Bier",
+    title: "Brouwerijen",
+    subtitle: "Gulpener, Walhalla, Homeland, Oedipus",
     story:
-      "Onze lunch en specials bewegen mee met het seizoen. We werken met leveranciers die oog hebben voor smaak en kwaliteit, zodat je bord altijd fris en in balans is.",
-    highlights: ["Seizoensgroenten", "Kruiden & bladgroen", "Soepen en dagspecials"],
+      "Voor onze bieren werken we met brouwerijen die passen bij Keppler: karaktervol, doordrinkbaar en altijd met oog voor kwaliteit.",
+    highlights: ["Gulpener", "Walhalla", "Homeland", "Oedipus"],
+    links: [
+      { href: "https://www.gulpener.nl/", label: "gulpener.nl" },
+      { href: "https://www.walhallacraftbeer.nl/", label: "walhallacraftbeer.nl" },
+      { href: "https://brouwerijhomeland.nl/?lang=en", label: "brouwerijhomeland.nl" },
+      { href: "https://oedipus.com/nl", label: "oedipus.com" },
+    ],
   },
   {
-    title: "Kaas, vleeswaren & borrel",
-    subtitle: "Voor planken, bites en een goede borrel",
-    imageSrc: "/dish-3.png",
-    imageAlt: "Borrelgerecht",
+    category: "Wijn",
+    title: "Margeret Wines",
+    subtitle: "Alle wijnen",
     story:
-      "Bij Keppler draait borrelen om delen en proeven. We kiezen producten die passen bij onze stijl: niet te ingewikkeld, wel heel goed — en het liefst van makers uit de buurt.",
-    highlights: ["Kaas & charcuterie", "Borrelgarnituren", "Vulling voor tosti’s & broodjes"],
+      "Onze wijnen komen via Margeret Wines. Zo houden we de selectie overzichtelijk en consistent — van glas tot fles.",
+    highlights: ["Wijn per glas", "Wijn per fles", "Altijd passend bij de kaart"],
+    links: [{ href: "https://www.margaretwines.com/", label: "margaretwines.com" }],
   },
   {
-    title: "Bier, wijn & dranken",
-    subtitle: "Lokaal waar het kan, zorgvuldig gekozen waar het moet",
-    imageSrc: "/cafe-keppler-wil-voor-import-en.jpg",
-    imageAlt: "Sfeerbeeld in het café",
+    category: "Koffie",
+    title: "Kaap Koffie",
+    subtitle: "Kaap de Groene Hoop",
     story:
-      "Voor onze kaart zoeken we naar dranken met karakter: goed doordrinkbaar, maar nooit saai. We geven ruimte aan lokale brouwers en makers, en vullen aan met favorieten die gewoon kloppen.",
-    highlights: ["Lokale bieren", "Wijn per glas", "Fris & non-alcoholisch"],
+      "Naast onze vaste koffie werken we met Kaap Koffie (Kaap de Groene Hoop) voor een selectie met een eigen signatuur.",
+    highlights: ["Koffie (selectie)", "Herkomst: Kaap de Groene Hoop"],
+    links: [
+      {
+        href: "https://www.kaapdegroenehoop.nl/kaapkoffie/",
+        label: "kaapdegroenehoop.nl/kaapkoffie",
+      },
+    ],
   },
   {
-    title: "Eigen micro‑branderij & bakkerij",
-    subtitle: "Huisgemaakt is bij ons écht huisgemaakt",
-    imageSrc: "/bakery-photo.png",
-    imageAlt: "Bakkerij bij Café Keppler",
-    imagePosition: "center",
+    category: "Groente",
+    title: "Tuinen van West",
+    subtitle: "Alle seizoensgroenten",
     story:
-      "Naast lokaal inkopen, maken we veel zelf. We branden onze koffiebonen en bakken dagelijks brood en zoet in eigen huis. Zo houden we de kwaliteit strak — en de geur in het café is een mooie bonus.",
-    highlights: ["Koffie uit eigen branderij", "Desembrood & croissants", "Taart & zoet"],
+      "Voor seizoensgroenten werken we met Tuinen van West. Zo koken we mee met wat het land geeft: vers, simpel en op z’n best.",
+    highlights: ["Seizoensgroenten", "Kruiden & bladgroen", "Altijd wisselend aanbod"],
+    links: [{ href: "https://tuinenvanwest.nl/", label: "tuinenvanwest.nl" }],
+  },
+  {
+    category: "Cacao & rum",
+    title: "Kaap de Groene Hoop",
+    subtitle: "Cacao en rum",
+    story:
+      "Voor cacao en rum werken we samen met Kaap de Groene Hoop — producten met karakter voor in het glas en op de kaart.",
+    highlights: ["Cacao", "Rum"],
+  },
+  {
+    category: "Meel & noten",
+    title: "Beko",
+    subtitle: "Voor al het meel en noten",
+    story:
+      "Onze bakkerij draait op goede basisproducten. Voor meel en noten kopen we in via Beko.",
+    highlights: ["Meel", "Noten", "Basis voor brood & zoet"],
+    links: [
+      {
+        href: "https://www.beko-groothandel.nl/meel-bloem/2304/",
+        label: "beko-groothandel.nl",
+      },
+    ],
+  },
+  {
+    category: "Patisserie",
+    title: "Baux Pastry",
+    subtitle: "Croissants",
+    story:
+      "Elke dag bakken we de croissantjes van Baux Pastry af — het enige dat we niet zelf maken, maar wél precies is zoals we het willen.",
+    highlights: ["Croissants (dagelijks afgebakken)"],
+    links: [{ href: "https://bauxpastry.com/", label: "bauxpastry.com" }],
+  },
+  {
+    category: "Vis",
+    title: "Rookt",
+    subtitle: "Makreel (als het weer kan)",
+    story:
+      "Als het weer het toelaat, halen we makreel bij Rookt. Vraag gerust naar de beschikbaarheid.",
+    highlights: ["Makreel (seizoens-/weer-afhankelijk)"],
+  },
+  {
+    category: "Vlees",
+    title: "Buitengewone Varkens",
+    subtitle: "Droge worsten, hammen, vers vlees",
+    story:
+      "Voor charcuterie en varkensvlees werken we met Buitengewone Varkens — van droge worst tot ham en vers vlees.",
+    highlights: ["Droge worsten", "Hammen", "Vers vlees"],
+    links: [{ href: "https://buitengewonevarkens.nl/", label: "buitengewonevarkens.nl" }],
+  },
+  {
+    category: "Rundvlees",
+    title: "Slagerij de Wit",
+    subtitle: "Rundvlees voor Charsjo, broodje bal en smashed burger",
+    story:
+      "Voor rundvlees werken we met Slagerij de Wit. Je proeft het terug in onze klassiekers en specials.",
+    highlights: ["Charsjo", "Broodje bal", "Smashed burger"],
+    links: [{ href: "https://slagerdewit.nl/", label: "slagerdewit.nl" }],
+  },
+  {
+    category: "Paddenstoelen",
+    title: "Mycophilia",
+    subtitle: "Oesterzwam-bitterballen en paddestoelen",
+    story:
+      "Voor oesterzwam-bitterballen en allerlei soorten paddestoelen werken we met Mycophilia.",
+    highlights: ["Oesterzwam-bitterballen", "Paddestoelen (diverse soorten)"],
+    links: [{ href: "http://www.mycophilia.nl/", label: "mycophilia.nl" }],
+  },
+  {
+    category: "Kaas",
+    title: "Kef",
+    subtitle: "Kazen voor het kaasplankje",
+    story:
+      "Voor ons kaasplankje kiezen we kazen via Kef — zorgvuldig geselecteerd en altijd in balans.",
+    highlights: ["Kazen voor het kaasplankje"],
+    links: [{ href: "https://www.abrahamkef.nl/", label: "abrahamkef.nl" }],
+  },
+  {
+    category: "Kaas",
+    title: "Moll",
+    subtitle: "Oude Huizer en Stolwijker kazen (Mosveld Markt)",
+    story:
+      "Oude Huizer en Stolwijker kazen halen we bij Moll op de Mosveld Markt.",
+    highlights: ["Oude Huizer", "Stolwijker", "Mosveld Markt"],
   },
 ];
 
@@ -155,18 +252,26 @@ export default function LokaalPage() {
             {LOCAL_PARTNERS.map((p, idx) => (
               <article
                 key={p.title}
-                className={idx % 2 === 1 ? "lokaalPartner lokaalPartner--reverse" : "lokaalPartner"}
+                className={[
+                  "lokaalPartner",
+                  !p.imageSrc ? "lokaalPartner--noMedia" : null,
+                  idx % 2 === 1 ? "lokaalPartner--reverse" : null,
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
               >
-                <div className="lokaalPartner__media" aria-hidden="true">
-                  <img
-                    className="lokaalPartner__img"
-                    src={p.imageSrc}
-                    alt={p.imageAlt}
-                    loading="lazy"
-                    decoding="async"
-                    style={p.imagePosition ? { objectPosition: p.imagePosition } : undefined}
-                  />
-                </div>
+                {p.imageSrc ? (
+                  <div className="lokaalPartner__media" aria-hidden="true">
+                    <img
+                      className="lokaalPartner__img"
+                      src={p.imageSrc}
+                      alt={p.imageAlt ?? ""}
+                      loading="lazy"
+                      decoding="async"
+                      style={p.imagePosition ? { objectPosition: p.imagePosition } : undefined}
+                    />
+                  </div>
+                ) : null}
 
                 <div
                   className="lokaalPartner__content"
@@ -174,10 +279,25 @@ export default function LokaalPage() {
                     contentRefs.current[idx] = el;
                   }}
                 >
-                  <div className="eyebrow">Leverancier</div>
+                  <div className="eyebrow">{p.category}</div>
                   <h3 className="lokaalPartner__title">{p.title}</h3>
                   <p className="lokaalPartner__subtitle">{p.subtitle}</p>
                   <p className="lokaalPartner__story">{p.story}</p>
+                  {p.links?.length ? (
+                    <div className="lokaalPartner__links" aria-label="Website links">
+                      {p.links.map((l) => (
+                        <a
+                          key={l.href}
+                          className="lokaalPartner__link"
+                          href={l.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {l.label} →
+                        </a>
+                      ))}
+                    </div>
+                  ) : null}
                   <ul className="lokaalPartner__list">
                     {p.highlights.map((h) => (
                       <li key={h}>{h}</li>

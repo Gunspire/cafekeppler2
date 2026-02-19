@@ -89,25 +89,20 @@ export default function BakkerijPage() {
             <div className="eyebrow">Huisgemaakt</div>
             <h2 className="section-title">Brood uit eigen bakkerij</h2>
             <p className="bakkerij__text">
-              In onze eigen bakkerij bakken we iedere dag vers brood. Je proeft het bij ontbijt
-              en lunch, naast je soep, en bij alles waar zo’n goed stuk brood nét het verschil
-              maakt.
+              We verkopen brood via het luik van donderdag t/m zondag. Alles wordt met
+              zuurdesem gebakken.
             </p>
             <p className="bakkerij__text">
-              Liever mee naar huis voor later? In het winkeltje verkopen we een selectie broden
-              (zolang de voorraad strekt).
+              Op zaterdag verkopen we naast ons Pain Gris ook Noors Speltbrood, Deens
+              Roggebrood, Alessio&apos;s foccaccia en stokbrood.
             </p>
 
             <ul className="bakkerij__bullets">
-              <li>Elke dag vers gebakken brood.</li>
-              <li>Bij ons in het café, of to-go voor later.</li>
-              <li>In het winkeltje: op = op.</li>
+              <li>
+                Wil je er zeker van zijn dat je niet misgrijpt? Bestel brood 2 dagen van tevoren
+                en we zorgen dat het voor je klaar ligt.
+              </li>
             </ul>
-
-            <p className="bakkerij__muted">
-              Te koop van donderdag tot zondag in ons winkeltje… maar op = op, dus wees er snel
-              bij!
-            </p>
           </div>
 
           <div className="bakkerij__media" aria-label="Vers brood van Keppler">
@@ -118,6 +113,50 @@ export default function BakkerijPage() {
               loading="lazy"
               decoding="async"
             />
+          </div>
+        </div>
+      </section>
+
+      <section className="section bakkerijAanbod" aria-label="Aanbod bakkerij">
+        <div className="bakkerijAanbod__bg" aria-hidden="true">
+          <div className="bakkerijAanbod__bgWall">
+            {Array.from({ length: 10 }).map((_, i) => (
+              <img
+                key={i}
+                className="bakkerijAanbod__bgLogo"
+                src="/logotjes/image%20(1).png"
+                alt=""
+              />
+            ))}
+          </div>
+          <div className="bakkerijAanbod__bgFade" />
+        </div>
+
+        <div className="bakkerijAanbod__inner">
+          <div className="bakkerij__card bakkerijAanbod__card">
+            <div className="eyebrow">Aanbod bakkerij</div>
+            <div className="bakkerij__cardTitle">Alles wordt met zuurdesem gebakken</div>
+            <ul className="bakkerij__list">
+              <li>Pain Gris — tarwe, volkoren en rogge (€ 6,-)</li>
+              <li>Noors Speltbrood — met zuidvruchten, zaden en noten (€ 5,50)</li>
+              <li>Deens Roggebrood — ovengebakken met venkel- en komijnzaad (€ 5,-)</li>
+              <li>Foccaccia — tarwe, zeezout en olijfolie (€ 3,50)</li>
+              <li>Stokbrood (€ 2,75)</li>
+            </ul>
+            <p className="bakkerij__muted">
+              Elke dag bakken we de croissantjes van Patisserie Baux af (het enige wat we niet
+              zelf maken) en maken we onze Kepplertjes — kaneelbroodjes. En verder veel ander
+              zoet:{" "}
+              <a
+                className="bakkerijAanbod__link"
+                href="/Cafe_Keppler_menu_mei_2025.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                zie menu
+              </a>
+              .
+            </p>
           </div>
         </div>
       </section>

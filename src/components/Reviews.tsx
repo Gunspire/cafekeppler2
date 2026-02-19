@@ -172,9 +172,6 @@ export default function Reviews() {
         <div className="reviews__header">
           <div className="eyebrow">Reviews</div>
           <h2 className="section-title">Wat gasten zeggen</h2>
-          <p className="reviews__sub">
-            De meest recente 5‑sterren reviews van Google.
-          </p>
         </div>
 
         {status === "loading" ? (

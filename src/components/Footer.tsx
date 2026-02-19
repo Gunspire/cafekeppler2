@@ -56,16 +56,32 @@ export default function Footer() {
             <div className="footer__heading">Openingstijden</div>
             <ul className="footer__list">
               <li>
-                <span>Ma–Vr</span>
-                <span>08:00–18:00</span>
+                <span>Ma</span>
+                <span>Gesloten</span>
+              </li>
+              <li>
+                <span>Di</span>
+                <span>08:30–16:00</span>
+              </li>
+              <li>
+                <span>Wo</span>
+                <span>08:30–23:00</span>
+              </li>
+              <li>
+                <span>Do</span>
+                <span>08:30–23:00</span>
+              </li>
+              <li>
+                <span>Vr</span>
+                <span>08:30–00:00</span>
               </li>
               <li>
                 <span>Za</span>
-                <span>09:00–18:00</span>
+                <span>09:00–00:00</span>
               </li>
               <li>
                 <span>Zo</span>
-                <span>10:00–17:00</span>
+                <span>09:00–18:00</span>
               </li>
             </ul>
           </div>

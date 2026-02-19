@@ -4,7 +4,11 @@ import { ACTUEEL_ITEMS, formatNl } from "../data/actueel";
 
 export default function ActueelPage() {
   const items = React.useMemo(() => {
-    return [...ACTUEEL_ITEMS].sort((a, b) => b.date.localeCompare(a.date));
+    return [...ACTUEEL_ITEMS].sort(
+      (a, b) =>
+        (Number(Boolean(b.date)) - Number(Boolean(a.date))) ||
+        (b.date ?? "").localeCompare(a.date ?? ""),
+    );
   }, []);
 
   return (
@@ -43,8 +47,17 @@ export default function ActueelPage() {
                     decoding="async"
                   />
                   <div className="event-card__overlay" />
+                  {e.ribbon ? (
+                    <div className="cornerRibbon cornerRibbon--card">
+                      <div className="cornerRibbon__label">{e.ribbon}</div>
+                    </div>
+                  ) : null}
                   <div className="event-card__date">
-                    <time dateTime={e.date}>{formatNl(e.date)}</time>
+                    {e.date ? (
+                      <time dateTime={e.date}>{e.dateLabel ?? formatNl(e.date)}</time>
+                    ) : (
+                      <span>{e.dateLabel ?? ""}</span>
+                    )}
                   </div>
                 </div>
 

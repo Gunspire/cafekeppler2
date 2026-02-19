@@ -124,16 +124,32 @@ export default function Info() {
           <h3 className="info__title">Openingstijden</h3>
           <ul className="info__list">
             <li>
-              <span>Maandag - Vrijdag</span>
-              <span>08:00 - 18:00</span>
+              <span>Maandag</span>
+              <span>Gesloten</span>
+            </li>
+            <li>
+              <span>Dinsdag</span>
+              <span>08:30 - 16:00</span>
+            </li>
+            <li>
+              <span>Woensdag</span>
+              <span>08:30 - 23:00</span>
+            </li>
+            <li>
+              <span>Donderdag</span>
+              <span>08:30 - 23:00</span>
+            </li>
+            <li>
+              <span>Vrijdag</span>
+              <span>08:30 - 00:00</span>
             </li>
             <li>
               <span>Zaterdag</span>
-              <span>09:00 - 18:00</span>
+              <span>09:00 - 00:00</span>
             </li>
             <li>
               <span>Zondag</span>
-              <span>10:00 - 17:00</span>
+              <span>09:00 - 18:00</span>
             </li>
           </ul>
         </div>
@@ -153,29 +169,29 @@ export default function Info() {
           >
             Routebeschrijving
           </a>
-        </div>
-      </div>
 
-      <div className="info__map">
-        {googleMapsKey && googlePlaceId && !mapError ? (
-          <>
-            <div className="map__label" aria-hidden="true">
-              {placeLabel}
-            </div>
-            <div className="map__canvas" ref={mapRef} />
-          </>
-        ) : (
-          <iframe
-            title="Keppler Locatie"
-            src="https://www.google.com/maps?q=9WP5%2BQ6%20Amsterdam&z=17&output=embed"
-            width="100%"
-            height="100%"
-            style={{ border: 0 }}
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          ></iframe>
-        )}
+          <div className="info__map info__map--inside" aria-label="Kaart">
+            {googleMapsKey && googlePlaceId && !mapError ? (
+              <>
+                <div className="map__label" aria-hidden="true">
+                  {placeLabel}
+                </div>
+                <div className="map__canvas" ref={mapRef} />
+              </>
+            ) : (
+              <iframe
+                title="Keppler Locatie"
+                src="https://www.google.com/maps?q=9WP5%2BQ6%20Amsterdam&z=17&output=embed"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+            )}
+          </div>
+        </div>
       </div>
     </section>
   );

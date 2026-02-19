@@ -153,10 +153,10 @@ export default function DinnerNotice() {
       <aside
         id="dinner-drawer"
         className={isOpen ? "dinnerDrawerPanel is-open" : "dinnerDrawerPanel"}
-        aria-label="Nieuw: Diner bij Keppler"
+        aria-label="Diner bij Keppler"
       >
         <div className="dinnerDrawerPanel__top">
-          <div className="dinnerDrawerPanel__eyebrow">Nieuw</div>
+          <div className="dinnerDrawerPanel__eyebrow">Avond open</div>
           <button
             type="button"
             className="dinnerDrawerToggle dinnerDrawerToggle--inner"
@@ -182,8 +182,8 @@ export default function DinnerNotice() {
 
         <div className="dinnerDrawerPanel__title">Diner bij Keppler</div>
         <div className="dinnerDrawerPanel__text">
-          We serveren elke avond diner. Ken je ons vooral van koffie & lunch? Kom ’s avonds
-          langs.
+          We zijn inmiddels alweer een jaar ’s avonds open van woensdag tot en met zaterdag.
+          Kom lekker borrelen, eten, je verjaardag vieren of na de film nog even nagenieten.
         </div>
         <div className="dinnerDrawerPanel__actions">
           <a

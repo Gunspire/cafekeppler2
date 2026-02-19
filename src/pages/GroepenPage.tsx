@@ -106,27 +106,26 @@ export default function GroepenPage() {
       <section className="section groups">
         <div className="groups__inner">
           <div className="groups__copy">
-            <div className="eyebrow">Mogelijkheden</div>
-            <h2 className="section-title">Gezellig met een gezelschap</h2>
+            <div className="eyebrow">Borrelen en eten</div>
+            <h2 className="section-title">Borrelen en eten</h2>
             <p className="groups__story">
-              Op zoek naar een fijne plek in Amsterdam‑Noord om met een grotere
-              groep samen te komen? Bij Café Keppler draait het om goede koffie,
-              lekker eten en een ongedwongen sfeer — ideaal voor een borrel,
-              verjaardag, reünie, jubileum of een ontspannen zakelijke bijeenkomst.
+              Op zoek naar een plek om gezellig te komen borrelen? We hebben ruimte
+              tot <span className="accentText">35 personen</span> om te bespreken. Omdat we verder ook gewoon open zijn
+              voor andere gasten kunnen we helaas geen grotere groepen aannemen.
             </p>
             <p className="groups__story">
-              Geef je datum, tijd en aantal personen door, plus wat je ongeveer in
-              gedachten hebt. Dan bekijken we de mogelijkheden en stemmen we alles
-              praktisch met je af.
+              Van <span className="accentText">16:00 - 18:00</span> zijn er geen extra kosten.
             </p>
-            <ul className="groups__bullets">
-              <li>Een plek binnen of buiten (afhankelijk van beschikbaarheid).</li>
-              <li>Voor borrels, diners en kleine vieringen.</li>
-              <li>We stemmen de invulling af op jullie moment en gezelschap.</li>
-            </ul>
-            <p className="groups__note">
-              Laat hieronder je gegevens achter, dan nemen we contact op om de
-              details te bespreken.
+            <p className="groups__story">
+              Tussen <span className="accentText">18:00 - 21:00</span> bieden we een borrel-drank-arrangement aan van{" "}
+              <span className="accentText">€ 12,95 p.p.p.u.</span> Dit omdat we in deze uren met de keuken open zijn en
+              we de tafels ook kunnen reserveren voor mensen die willen komen eten.
+              Heb je hier vragen over, neem dan contact op.
+            </p>
+            <p className="groups__story">
+              Kom je eten met een groep. De maximale grootte van de groep is{" "}
+              <span className="accentText">20 personen</span>. In
+              overleg met ons bespreken we wat we kunnen aanbieden.
             </p>
           </div>
 

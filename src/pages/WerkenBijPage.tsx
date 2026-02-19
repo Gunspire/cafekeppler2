@@ -48,6 +48,21 @@ const EXPERIENCE_LEVELS: ExperienceLevel[] = [
   "Expert",
 ];
 
+function bytesToBase64(bytes: Uint8Array) {
+  // Convert in chunks to avoid call stack issues.
+  let binary = "";
+  const chunk = 0x8000;
+  for (let i = 0; i < bytes.length; i += chunk) {
+    binary += String.fromCharCode(...bytes.subarray(i, i + chunk));
+  }
+  return btoa(binary);
+}
+
+async function fileToBase64(file: File) {
+  const buf = await file.arrayBuffer();
+  return bytesToBase64(new Uint8Array(buf));
+}
+
 function buildApplicationText(state: ApplyState) {
   const roleText =
     state.role === "Anders" ? `Anders: ${state.roleOther || "-"}` : state.role;
@@ -132,17 +147,43 @@ export default function WerkenBijPage() {
         throw new Error("Kies je beschikbaarheid (Overdag / Avond / Beide).");
       }
 
-      const to = "info@cafekeppler.nl";
-      const subject = `Sollicitatie Café Keppler — ${roleText} — ${state.name.trim()}`;
-      const cvLine = state.cvFile
-        ? `CV (PDF): ${state.cvFile.name}`
-        : "CV (PDF): voeg toe als bijlage";
-      const bodyText = `${buildApplicationText(state)}\n${cvLine}\n`;
+      const cvBase64 = state.cvFile ? await fileToBase64(state.cvFile) : null;
+      const resp = await fetch("/api/sollicitatie", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: state.name.trim(),
+          email: state.email.trim(),
+          phone: state.phone.trim(),
+          role: roleText,
+          experienceLevel: state.experienceLevel,
+          hoursPerWeek: state.hoursPerWeek.trim(),
+          startDate: state.startDate,
+          days: state.days,
+          availabilityBlock: state.availabilityBlock,
+          motivation: state.motivation.trim(),
+          cv: state.cvFile
+            ? { filename: state.cvFile.name, contentBase64: cvBase64 }
+            : undefined,
+        }),
+      });
 
-      const mailto = `mailto:${to}?subject=${encodeURIComponent(
-        subject,
-      )}&body=${encodeURIComponent(bodyText)}`;
-      window.location.href = mailto;
+      const rawText = await resp.text();
+      const data = ((): { ok?: boolean; error?: string } | null => {
+        try {
+          return rawText ? (JSON.parse(rawText) as any) : null;
+        } catch {
+          return null;
+        }
+      })();
+      if (!resp.ok) {
+        throw new Error(
+          data?.error ||
+            `Versturen mislukt (${resp.status}). ${
+              rawText && !data ? rawText.slice(0, 200) : "Probeer het opnieuw."
+            }`,
+        );
+      }
       setSubmitted(true);
     } catch (e: any) {
       setError(e?.message ? String(e.message) : "Er ging iets mis.");
@@ -446,7 +487,7 @@ export default function WerkenBijPage() {
 
                     {submitted ? (
                       <div className="apply__sent">
-                        Je mail-app is geopend met je sollicitatie. Vergeet je CV (PDF) als bijlage toe te voegen.
+                        Bedankt! Je sollicitatie is verstuurd. Je ontvangt zo een bevestiging per mail.
                       </div>
                     ) : null}
                   </form>

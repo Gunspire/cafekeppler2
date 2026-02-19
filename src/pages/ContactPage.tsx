@@ -15,6 +15,9 @@ const DEFAULT_STATE: ContactState = {
 
 export default function ContactPage() {
   const [state, setState] = useState<ContactState>(DEFAULT_STATE);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [submitted, setSubmitted] = useState(false);
 
   const mailtoHref = useMemo(() => {
     const to = "info@cafekeppler.nl";
@@ -34,6 +37,48 @@ export default function ContactPage() {
       subject,
     )}&body=${encodeURIComponent(body)}`;
   }, [state]);
+
+  const onSubmit = async () => {
+    setError(null);
+    setSubmitted(false);
+    setBusy(true);
+    try {
+      const resp = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: state.name.trim(),
+          email: state.email.trim(),
+          message: state.message.trim(),
+        }),
+      });
+
+      const rawText = await resp.text();
+      const data = ((): { ok?: boolean; error?: string } | null => {
+        try {
+          return rawText ? (JSON.parse(rawText) as any) : null;
+        } catch {
+          return null;
+        }
+      })();
+
+      if (!resp.ok) {
+        throw new Error(
+          data?.error ||
+            `Versturen mislukt (${resp.status}). ${
+              rawText && !data ? rawText.slice(0, 200) : "Probeer het opnieuw."
+            }`,
+        );
+      }
+
+      setSubmitted(true);
+      setState(DEFAULT_STATE);
+    } catch (e: any) {
+      setError(e?.message ? String(e.message) : "Er ging iets mis.");
+    } finally {
+      setBusy(false);
+    }
+  };
 
   return (
     <>
@@ -77,7 +122,7 @@ export default function ContactPage() {
             className="contactPage__form"
             onSubmit={(e) => {
               e.preventDefault();
-              window.location.href = mailtoHref;
+              onSubmit();
             }}
           >
             <div className="form-grid">
@@ -119,9 +164,16 @@ export default function ContactPage() {
               </label>
             </div>
 
+            {error ? <div className="apply__error">{error}</div> : null}
+            {submitted ? (
+              <div className="apply__sent">
+                Bedankt! Je bericht is verstuurd. Je ontvangt zo een bevestiging per mail.
+              </div>
+            ) : null}
+
             <div className="groups__actions">
               <button type="submit" className="btn btn--primary">
-                Verstuur
+                {busy ? "Bezig…" : "Verstuur"}
               </button>
               <a className="btn btn--secondary" href={mailtoHref}>
                 Open mail

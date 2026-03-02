@@ -1,46 +1,21 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React from "react";
 
 export default function Hero() {
-  const slides = useMemo(
-    () => [
-      { src: "/hero-2.jpeg", alt: "Café Keppler sfeer (avond)" },
-      {
-        src: "/Generated Image February 04, 2026 - 1_08PM.jpeg",
-        alt: "Café Keppler terras sfeer",
-      },
-      { src: "/01-misset-cafe-keppler-9049.jpg", alt: "Café Keppler sfeer" },
-    ],
-    [],
-  );
-
-  const [activeIdx, setActiveIdx] = useState(0);
-
-  useEffect(() => {
-    const reduceMotion =
-      typeof window !== "undefined" &&
-      window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
-    if (reduceMotion) return;
-
-    const id = window.setInterval(() => {
-      setActiveIdx((i) => (i + 1) % slides.length);
-    }, 5000);
-
-    return () => window.clearInterval(id);
-  }, [slides.length]);
+  const heroImage = {
+    src: "/Generated%20Image%20February%2004,%202026%20-%201_08PM.jpeg",
+    alt: "Café Keppler terras sfeer",
+  };
 
   return (
     <section className="hero">
       <div className="hero__bg">
-        {slides.map((s, idx) => (
-          <img
-            key={s.src}
-            src={s.src}
-            alt={s.alt}
-            className={idx === activeIdx ? "hero__bgImg is-active" : "hero__bgImg"}
-            loading={idx === 0 ? "eager" : "lazy"}
-            decoding="async"
-          />
-        ))}
+        <img
+          src={heroImage.src}
+          alt={heroImage.alt}
+          className="hero__bgImg is-active"
+          loading="eager"
+          decoding="async"
+        />
       </div>
       <div className="hero__overlay"></div>
 

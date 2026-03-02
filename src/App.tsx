@@ -11,6 +11,7 @@ import LokaalPage from "./pages/LokaalPage";
 import BakkerijPage from "./pages/BakkerijPage";
 import DinnerNotice from "./components/DinnerNotice";
 import Footer from "./components/Footer";
+import ZenchefWidget from "./components/ZenchefWidget";
 
 export default function App() {
   const location = useLocation();
@@ -19,6 +20,7 @@ export default function App() {
     <main>
       <Header />
       <DinnerNotice />
+      <ZenchefWidget />
       <Routes location={location}>
         <Route path="/" element={<HomePage />} />
         <Route path="/groepen" element={<GroepenPage />} />

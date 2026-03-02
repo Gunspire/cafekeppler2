@@ -2,6 +2,7 @@ import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
 import sollicitatieHandler from "./api/sollicitatie";
 import contactHandler from "./api/contact";
+import bestellingHandler from "./api/bestelling";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -52,6 +53,7 @@ export default defineConfig(({ mode }) => {
 
           mount("/api/sollicitatie", sollicitatieHandler as any);
           mount("/api/contact", contactHandler as any);
+          mount("/api/bestelling", bestellingHandler as any);
         },
       },
     ],

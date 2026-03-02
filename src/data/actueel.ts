@@ -58,25 +58,26 @@ export const ACTUEEL_ITEMS: ActueelItem[] = [
   {
     slug: "keppler-klaverjassen",
     title: "Keppler Klaverjassen",
-    dateLabel: "Doorlopend",
+    date: "2026-04-02",
+    dateLabel: "Do 2 apr · 20:30",
     excerpt:
-      "Leer het spel bij ons in het café — laagdrempelig, met uitleg en een drankje erbij.",
+      "Leer het spel bij ons in het café — laagdrempelig, met uitleg en een drankje erbij. Start om 20:30.",
     imageSrc: "/01-misset-cafe-keppler-9049.jpg",
     imageAlt: "Tafel in Café Keppler",
     ribbon: "Leer het spel",
     body: [
       "Nieuw met klaverjassen, of wil je je spel weer even opfrissen? Schuif aan bij Keppler Klaverjassen.",
       "We leggen de basis rustig uit (spelverloop, punten en afspraken) en spelen vervolgens een paar ontspannen rondes.",
-      "Houd Actueel in de gaten voor de eerstvolgende keer — of vraag ernaar aan de bar.",
+      "De volgende klaverjasavond is op donderdag 2 april vanaf 20:30. Houd Actueel in de gaten voor volgende edities — of vraag ernaar aan de bar.",
     ],
   },
   {
     slug: "muziekquiz",
     title: "Muziekquiz bij Keppler",
-    date: "2026-02-18",
+    date: "2026-03-18",
     excerpt:
       "Een gezellige avond met rondes vol herkenning, verrassingen en een klein prijsje voor de winnaars.",
-    imageSrc: "/actueel-muziekquiz.png",
+    imageSrc: "/pictures/Poster%20Muziekquiz.jpg",
     imageAlt: "Poster van de Muziekquiz-avond bij Café Keppler",
     ribbon: "Elke maand",
     body: [

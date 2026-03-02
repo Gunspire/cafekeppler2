@@ -50,18 +50,22 @@ const LOCAL_PARTNERS: LocalPartner[] = [
     links: [{ href: "https://www.margaretwines.com/", label: "margaretwines.com" }],
   },
   {
-    category: "Koffie",
-    title: "Kaap Koffie",
-    subtitle: "Kaap de Groene Hoop",
+    category: "Natuurwijn",
+    title: "Vinatura",
+    subtitle: "Vin-naturels + blond bier (Loirette)",
     story:
-      "Naast onze vaste koffie werken we met Kaap Koffie (Kaap de Groene Hoop) voor een selectie met een eigen signatuur.",
-    highlights: ["Koffie (selectie)", "Herkomst: Kaap de Groene Hoop"],
-    links: [
-      {
-        href: "https://www.kaapdegroenehoop.nl/kaapkoffie/",
-        label: "kaapdegroenehoop.nl/kaapkoffie",
-      },
-    ],
+      "Vinatura levert onze vin-naturels (natuurwijnen). Daarnaast komt via hen ook het heerlijke blond biertje Loirette.",
+    highlights: ["Natuurwijnen (vin-naturels)", "Blond bier: Loirette"],
+    links: [{ href: "https://www.vinatura.nl/", label: "vinatura.nl" }],
+  },
+  {
+    category: "Cider",
+    title: "Pomme d’Or",
+    subtitle: "Alle ciders",
+    story:
+      "Voor cider werken we met Pomme d’Or. Zo houden we een mooie, consistente selectie op de kaart.",
+    highlights: ["Ciders (selectie)"],
+    links: [{ href: "https://pommedor.nl/", label: "pommedor.nl" }],
   },
   {
     category: "Groente",
@@ -71,6 +75,15 @@ const LOCAL_PARTNERS: LocalPartner[] = [
       "Voor seizoensgroenten werken we met Tuinen van West. Zo koken we mee met wat het land geeft: vers, simpel en op z’n best.",
     highlights: ["Seizoensgroenten", "Kruiden & bladgroen", "Altijd wisselend aanbod"],
     links: [{ href: "https://tuinenvanwest.nl/", label: "tuinenvanwest.nl" }],
+  },
+  {
+    category: "Zuivel",
+    title: "Boeren van Amstel",
+    subtitle: "Melk en yoghurt",
+    story:
+      "Voor melk en yoghurt werken we met Boeren van Amstel: boeren uit de regio die lokale zuivel leveren in de korte keten.",
+    highlights: ["Melk", "Yoghurt"],
+    links: [{ href: "https://boerenvanamstel.nl/", label: "boerenvanamstel.nl" }],
   },
   {
     category: "Cacao & rum",

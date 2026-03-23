@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react";
 import sollicitatieHandler from "./api/sollicitatie";
 import contactHandler from "./api/contact";
 import bestellingHandler from "./api/bestelling";
+import { kepplerSitemapPlugin } from "./vite-plugin-sitemap";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -13,6 +14,7 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [
       react(),
+      kepplerSitemapPlugin(),
       {
         name: "keppler-dev-api",
         configureServer(server) {

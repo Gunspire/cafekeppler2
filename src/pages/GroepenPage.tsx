@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from "react";
+import Hero from "../components/Hero";
 
 type MeetingType =
   | "Borrel"
@@ -83,25 +84,7 @@ export default function GroepenPage() {
 
   return (
     <>
-      <section className="page-hero" aria-label="Groepen">
-        <div className="page-hero__bg" aria-hidden="true">
-          <img
-            src="/hero-2.jpeg"
-            alt=""
-            className="page-hero__img"
-          />
-          <div className="page-hero__overlay" />
-        </div>
-
-        <div className="page-hero__content">
-          <div className="eyebrow page-hero__eyebrow">Groepen</div>
-          <h1 className="page-hero__title">Samen bij Keppler</h1>
-          <p className="page-hero__text">
-            Groepsreservering plannen? We denken graag mee over de invulling —
-            laat je wensen achter en we reageren snel.
-          </p>
-        </div>
-      </section>
+      <Hero />
 
       <section className="section groups">
         <div className="groups__inner">

@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import SharedPageHeroBackground from "../components/SharedPageHeroBackground";
+import { HERO_START_SLIDE_INDEX } from "../data/sharedHeroBackgroundSlides";
 
 type LocalPartner = {
   category: string;
@@ -108,6 +110,19 @@ const LOCAL_PARTNERS: LocalPartner[] = [
     ],
   },
   {
+    category: "Pasta",
+    title: "Il Pastificio",
+    subtitle: "Verse ambachtelijke pasta",
+    story:
+      "Il Pastificio — ‘de pastafabriek’ — zit sinds eind 2012 in De Pijp. Ze zijn puur en authentiek en maken hun pasta ambachtelijk; het brede aanbod pastasoorten sluit aan bij wat we in de keuken willen. Voor Café Keppler leveren zij onze verse pasta, zodat onze gerechten dezelfde kwaliteit hebben als in hun winkel.",
+    highlights: [
+      "Verse pasta (leverancier voor Keppler)",
+      "Ambachtelijk gemaakt in Amsterdam",
+      "Ruime keuze aan pastasoorten",
+    ],
+    links: [{ href: "https://ilpastificio.nl/", label: "ilpastificio.nl" }],
+  },
+  {
     category: "Patisserie",
     title: "Baux Pastry",
     subtitle: "Croissants",
@@ -115,14 +130,6 @@ const LOCAL_PARTNERS: LocalPartner[] = [
       "Elke dag bakken we de croissantjes van Baux Pastry af — het enige dat we niet zelf maken, maar wél precies is zoals we het willen.",
     highlights: ["Croissants (dagelijks afgebakken)"],
     links: [{ href: "https://bauxpastry.com/", label: "bauxpastry.com" }],
-  },
-  {
-    category: "Vis",
-    title: "Rookt",
-    subtitle: "Makreel (als het weer kan)",
-    story:
-      "Als het weer het toelaat, halen we makreel bij Rookt. Vraag gerust naar de beschikbaarheid.",
-    highlights: ["Makreel (seizoens-/weer-afhankelijk)"],
   },
   {
     category: "Vlees",
@@ -211,10 +218,7 @@ export default function LokaalPage() {
   return (
     <>
       <section className="page-hero" aria-label="Lokaal">
-        <div className="page-hero__bg" aria-hidden="true">
-          <img src="/intro-food.png" alt="" className="page-hero__img" />
-          <div className="page-hero__overlay" />
-        </div>
+        <SharedPageHeroBackground initialSlideIndex={HERO_START_SLIDE_INDEX.lokaal} />
 
         <div className="page-hero__content">
           <div className="eyebrow page-hero__eyebrow">Lokaal</div>

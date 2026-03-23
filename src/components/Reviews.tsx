@@ -35,7 +35,7 @@ function loadGoogleMaps(apiKey: string): Promise<void> {
     script.defer = true;
     script.src = `https://maps.googleapis.com/maps/api/js?key=${encodeURIComponent(
       apiKey,
-    )}&libraries=places`;
+    )}&libraries=places&language=nl`;
     script.onload = () => resolve();
     script.onerror = () => reject(new Error("Failed to load Google Maps script."));
     document.head.appendChild(script);
@@ -53,6 +53,36 @@ function toReview(r: any): Review {
   };
 }
 
+/** Max recent 5★ reviews to show. */
+const MAX_REVIEWS = 3;
+/** Preview: first ~3 lines or ~220 chars, whichever is shorter. */
+const PREVIEW_MAX_CHARS = 220;
+
+function reviewPreview(text: string): string {
+  const raw = text.trim();
+  if (!raw) return "";
+
+  const lines = raw
+    .split(/\r?\n/)
+    .map((l) => l.trim())
+    .filter(Boolean);
+
+  const moreThanThreeLines = lines.length > 3;
+  let chunk =
+    lines.length > 1 ? lines.slice(0, 3).join(" ") : raw;
+
+  if (chunk.length > PREVIEW_MAX_CHARS) {
+    const slice = chunk.slice(0, PREVIEW_MAX_CHARS);
+    const lastSpace = slice.lastIndexOf(" ");
+    chunk =
+      (lastSpace > 40 ? slice.slice(0, lastSpace) : slice).trimEnd() + "…";
+  } else if (moreThanThreeLines) {
+    chunk += "…";
+  }
+
+  return chunk;
+}
+
 export default function Reviews() {
   const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY as string | undefined;
   const placeId = import.meta.env.VITE_GOOGLE_PLACE_ID as string | undefined;
@@ -65,7 +95,7 @@ export default function Reviews() {
   const [placeUrl, setPlaceUrl] = useState<string | null>(null);
 
   const cacheKey = useMemo(
-    () => (placeId ? `keppler.reviews.v1.${placeId}` : null),
+    () => (placeId ? `keppler.reviews.v3.${placeId}` : null),
     [placeId],
   );
 
@@ -112,6 +142,7 @@ export default function Reviews() {
               {
                 placeId,
                 fields: ["name", "url", "reviews", "rating", "user_ratings_total"],
+                language: "nl",
               },
               (place: any, s: any) => {
                 if (s !== google.maps.places.PlacesServiceStatus.OK) {
@@ -127,7 +158,7 @@ export default function Reviews() {
                   .map(toReview)
                   .filter((r: Review) => r.rating === 5)
                   .sort((a: Review, b: Review) => b.time - a.time)
-                  .slice(0, 6);
+                  .slice(0, MAX_REVIEWS);
 
                 if (!cancelled) {
                   setPlaceName(place.name || "Café Keppler");
@@ -167,20 +198,20 @@ export default function Reviews() {
   if (status === "missing") return null;
 
   return (
-    <section className="section reviews" id="reviews" aria-label="Reviews">
+    <section className="section reviews" id="reviews" aria-label="Beoordelingen">
       <div className="reviews__inner">
         <div className="reviews__header">
-          <div className="eyebrow">Reviews</div>
+          <div className="eyebrow">Recensies</div>
           <h2 className="section-title">Wat gasten zeggen</h2>
         </div>
 
         {status === "loading" ? (
-          <div className="reviews__loading">Reviews laden…</div>
+          <div className="reviews__loading">Recensies laden…</div>
         ) : null}
 
         {status === "error" ? (
           <div className="reviews__loading">
-            Reviews konden niet geladen worden.
+            Recensies konden niet worden geladen.
           </div>
         ) : null}
 
@@ -209,7 +240,7 @@ export default function Reviews() {
                       />
                     ) : null}
                   </div>
-                  <p className="review__text">{r.text}</p>
+                  <p className="review__text">{reviewPreview(r.text)}</p>
                 </article>
               ))}
             </div>

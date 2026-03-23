@@ -1,3 +1,5 @@
+import { SHARED_HERO_BACKGROUND_SLIDES } from "./sharedHeroBackgroundSlides";
+
 export type ActueelItem = {
   slug: string;
   title: string;
@@ -46,8 +48,8 @@ export const ACTUEEL_ITEMS: ActueelItem[] = [
     dateLabel: "2× per jaar",
     excerpt:
       "Twee keer per jaar spelen studenten van het conservatorium een toegankelijk klassiek programma bij Keppler.",
-    imageSrc: "/01-misset-cafe-keppler-9049.jpg",
-    imageAlt: "Interieur van Café Keppler",
+    imageSrc: SHARED_HERO_BACKGROUND_SLIDES[0].src,
+    imageAlt: SHARED_HERO_BACKGROUND_SLIDES[0].alt,
     ribbon: "2× per jaar",
     body: [
       "Keppler Klassiek is een laagdrempelige avond met live klassieke muziek, gebracht door studenten van het conservatorium.",
@@ -62,8 +64,9 @@ export const ACTUEEL_ITEMS: ActueelItem[] = [
     dateLabel: "Do 2 apr · 20:30",
     excerpt:
       "Leer het spel bij ons in het café — laagdrempelig, met uitleg en een drankje erbij. Start om 20:30.",
-    imageSrc: "/01-misset-cafe-keppler-9049.jpg",
-    imageAlt: "Tafel in Café Keppler",
+    imageSrc:
+      "/nieuw%20fotos/WhatsApp%20Image%202026-03-11%20at%2015.01.28.jpeg",
+    imageAlt: "Keppler Klaverjassen — spelletjesavond bij Café Keppler",
     ribbon: "Leer het spel",
     body: [
       "Nieuw met klaverjassen, of wil je je spel weer even opfrissen? Schuif aan bij Keppler Klaverjassen.",
@@ -106,8 +109,8 @@ export const ACTUEEL_ITEMS: ActueelItem[] = [
     date: "2026-03-15",
     excerpt:
       "Een relaxed moment voor de buurt: borrelhap, lokale drankjes en fijne muziek. Meer info binnenkort.",
-    imageSrc: "/01-misset-cafe-keppler-9049.jpg",
-    imageAlt: "Interieur van Café Keppler",
+    imageSrc: SHARED_HERO_BACKGROUND_SLIDES[1].src,
+    imageAlt: SHARED_HERO_BACKGROUND_SLIDES[1].alt,
     body: [
       "Een laagdrempelige borrel voor de buurt: even bijpraten, een drankje, iets lekkers en fijne muziek op de achtergrond.",
       "We zetten een kleine selectie borrelhappen klaar en zorgen voor een warme, ongedwongen sfeer.",

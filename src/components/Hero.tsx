@@ -1,21 +1,33 @@
 import React from "react";
+import {
+  HERO_START_SLIDE_INDEX,
+  SHARED_HERO_BACKGROUND_SLIDES,
+} from "../data/sharedHeroBackgroundSlides";
+import { useHeroSlideshow } from "../hooks/useHeroSlideshow";
 
 export default function Hero() {
-  const heroImage = {
-    src: "/Generated%20Image%20February%2004,%202026%20-%201_08PM.jpeg",
-    alt: "Café Keppler terras sfeer",
-  };
+  const n = SHARED_HERO_BACKGROUND_SLIDES.length;
+  const start =
+    n > 0
+      ? ((HERO_START_SLIDE_INDEX.home % n) + n) % n
+      : 0;
+  const activeIdx = useHeroSlideshow(n, 6500, HERO_START_SLIDE_INDEX.home);
 
   return (
     <section className="hero">
       <div className="hero__bg">
-        <img
-          src={heroImage.src}
-          alt={heroImage.alt}
-          className="hero__bgImg is-active"
-          loading="eager"
-          decoding="async"
-        />
+        {SHARED_HERO_BACKGROUND_SLIDES.map((slide, idx) => (
+          <img
+            key={slide.src}
+            src={slide.src}
+            alt=""
+            className={
+              idx === activeIdx ? "hero__bgImg is-active" : "hero__bgImg"
+            }
+            loading={idx === start ? "eager" : "lazy"}
+            decoding="async"
+          />
+        ))}
       </div>
       <div className="hero__overlay"></div>
 

@@ -170,13 +170,18 @@ export default function DinnerNotice() {
             }}
             aria-label="Diner-melding sluiten"
           >
-            <img
-              className="dinnerDrawerToggle__logo"
-              src="/logotjes/logo-header.png"
-              alt=""
-              aria-hidden="true"
-              draggable={false}
-            />
+            <span className="dinnerDrawerToggle__closeIcon" aria-hidden="true">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.25"
+                strokeLinecap="round"
+              >
+                <path d="M6 6l12 12M18 6L6 18" />
+              </svg>
+            </span>
           </button>
         </div>
 

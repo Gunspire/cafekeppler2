@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import SharedPageHeroBackground from "../components/SharedPageHeroBackground";
+import { HERO_START_SLIDE_INDEX } from "../data/sharedHeroBackgroundSlides";
 import { ACTUEEL_ITEMS, formatNl } from "../data/actueel";
 
 export default function ActueelPage() {
@@ -14,10 +16,7 @@ export default function ActueelPage() {
   return (
     <>
       <section className="page-hero" aria-label="Actueel overzicht">
-        <div className="page-hero__bg" aria-hidden="true">
-          <img src="/01-misset-cafe-keppler-9049.jpg" alt="" className="page-hero__img" />
-          <div className="page-hero__overlay" />
-        </div>
+        <SharedPageHeroBackground initialSlideIndex={HERO_START_SLIDE_INDEX.actueel} />
 
         <div className="page-hero__content">
           <div className="eyebrow page-hero__eyebrow">Actueel</div>

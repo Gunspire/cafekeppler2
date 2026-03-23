@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from "react";
+import Hero from "../components/Hero";
 import Info from "../components/Info";
 
 type ContactState = {
@@ -82,25 +83,7 @@ export default function ContactPage() {
 
   return (
     <>
-      <section className="page-hero" aria-label="Contact">
-        <div className="page-hero__bg" aria-hidden="true">
-          <img
-            src="/01-misset-cafe-keppler-9049.jpg"
-            alt=""
-            className="page-hero__img"
-          />
-          <div className="page-hero__overlay" />
-        </div>
-
-        <div className="page-hero__content">
-          <div className="eyebrow page-hero__eyebrow">Contact</div>
-          <h1 className="page-hero__title">Neem contact op</h1>
-          <p className="page-hero__text">
-            Vraagje, idee of groepsaanvraag? Stuur een bericht — we reageren zo
-            snel mogelijk.
-          </p>
-        </div>
-      </section>
+      <Hero />
 
       <section className="section contactPage">
         <div className="contactPage__inner">

@@ -26,7 +26,7 @@ function loadGoogleMaps(apiKey: string): Promise<void> {
     script.defer = true;
     script.src = `https://maps.googleapis.com/maps/api/js?key=${encodeURIComponent(
       apiKey,
-    )}&libraries=places`;
+    )}&libraries=places&language=nl`;
     script.onload = () => resolve();
     script.onerror = () => reject(new Error("Failed to load Google Maps script."));
     document.head.appendChild(script);
@@ -83,25 +83,17 @@ export default function Info() {
 
                 const map = new google.maps.Map(mapRef.current, {
                   center: loc,
-                  zoom: 16,
+                  zoom: 13,
                   disableDefaultUI: true,
                   zoomControl: true,
                   gestureHandling: "cooperative",
                 });
 
-                const marker = new google.maps.Marker({
+                new google.maps.Marker({
                   map,
                   position: loc,
                   title: place?.name ?? "Café Keppler",
                 });
-
-                // Optional: open a small info bubble on load (no coordinates text)
-                const info = new google.maps.InfoWindow({
-                  content: `<div style="font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; font-size: 14px; font-weight: 600;">${
-                    place?.name ?? "Café Keppler"
-                  }</div>`,
-                });
-                info.open({ map, anchor: marker });
 
                 resolve();
               },
@@ -181,7 +173,7 @@ export default function Info() {
             ) : (
               <iframe
                 title="Keppler Locatie"
-                src="https://www.google.com/maps?q=9WP5%2BQ6%20Amsterdam&z=17&output=embed"
+                src="https://www.google.com/maps?q=9WP5%2BQ6%20Amsterdam&z=13&output=embed"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}

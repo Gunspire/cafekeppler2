@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ACTUEEL_ITEMS, formatNl } from "../data/actueel";
+import { ACTUEEL_ITEMS, formatNl, type ActueelItem } from "../data/actueel";
+
+const HOME_ACTUEEL_COUNT = 3;
 
 export default function Events() {
   const todayIso = React.useMemo(() => {
@@ -11,19 +13,40 @@ export default function Events() {
     return `${yyyy}-${mm}-${dd}`;
   }, []);
 
-  const items = React.useMemo(() => {
-    const dated = ACTUEEL_ITEMS.filter(
-      (i) => i.showOnHome !== false && Boolean(i.date),
-    ) as Array<(typeof ACTUEEL_ITEMS)[number] & { date: string }>;
+  const cards = React.useMemo(() => {
+    const pool = ACTUEEL_ITEMS.filter((i) => i.showOnHome !== false);
 
-    const upcoming = dated
+    const withDate = pool.filter(
+      (i): i is ActueelItem & { date: string } => Boolean(i.date),
+    );
+    const withoutDate = pool.filter((i) => !i.date);
+
+    const upcoming = withDate
       .filter((i) => i.date >= todayIso)
-      .sort((a, b) => a.date.localeCompare(b.date))
-      .slice(0, 3);
+      .sort((a, b) => a.date.localeCompare(b.date));
+    const past = withDate
+      .filter((i) => i.date < todayIso)
+      .sort((a, b) => b.date.localeCompare(a.date));
 
-    // If there are no upcoming items (e.g. old seeded data), show the next 3 by date.
-    if (upcoming.length) return upcoming;
-    return dated.sort((a, b) => a.date.localeCompare(b.date)).slice(0, 3);
+    const picked: ActueelItem[] = [];
+
+    for (const u of upcoming) {
+      if (picked.length >= HOME_ACTUEEL_COUNT) break;
+      picked.push(u);
+    }
+    for (const p of past) {
+      if (picked.length >= HOME_ACTUEEL_COUNT) break;
+      picked.push(p);
+    }
+    for (const nd of withoutDate) {
+      if (picked.length >= HOME_ACTUEEL_COUNT) break;
+      picked.push(nd);
+    }
+
+    return picked.slice(0, HOME_ACTUEEL_COUNT).map((e) => ({
+      item: e,
+      isPast: Boolean(e.date && e.date < todayIso),
+    }));
   }, [todayIso]);
 
   return (
@@ -31,12 +54,23 @@ export default function Events() {
       <div className="events__inner">
         <div className="events__header">
           <div className="eyebrow">Actueel</div>
-          <h2 className="section-title">Binnenkort</h2>
+          <h2 className="section-title">Wat er speelt</h2>
         </div>
 
         <div className="events__grid">
-          {items.map((e) => (
-            <Link key={e.slug} className="event-card" to={`/actueel/${e.slug}`}>
+          {cards.map(({ item: e, isPast }) => (
+            <Link
+              key={e.slug}
+              className={["event-card", isPast ? "event-card--past" : null]
+                .filter(Boolean)
+                .join(" ")}
+              to={`/actueel/${e.slug}`}
+              aria-label={
+                isPast
+                  ? `${e.title} (afgelopen)`
+                  : undefined
+              }
+            >
               <div className="event-card__media" aria-hidden="true">
                 <img
                   src={e.imageSrc}
@@ -45,6 +79,9 @@ export default function Events() {
                   className="event-card__img"
                 />
                 <div className="event-card__overlay" />
+                {isPast ? (
+                  <span className="event-card__pastBadge">Afgelopen</span>
+                ) : null}
                 {e.ribbon ? (
                   <div className="cornerRibbon cornerRibbon--card">
                     <div className="cornerRibbon__label">{e.ribbon}</div>
@@ -77,4 +114,3 @@ export default function Events() {
     </section>
   );
 }
-

@@ -10,6 +10,7 @@ import WerkenBijPage from "./pages/WerkenBijPage";
 import LokaalPage from "./pages/LokaalPage";
 import BakkerijPage from "./pages/BakkerijPage";
 import DinnerNotice from "./components/DinnerNotice";
+import NewDishSpotlight from "./components/NewDishSpotlight";
 import Footer from "./components/Footer";
 import ZenchefWidget from "./components/ZenchefWidget";
 
@@ -20,6 +21,7 @@ export default function App() {
     <main>
       <Header />
       <DinnerNotice />
+      <NewDishSpotlight />
       <ZenchefWidget />
       <Routes location={location}>
         <Route path="/" element={<HomePage />} />

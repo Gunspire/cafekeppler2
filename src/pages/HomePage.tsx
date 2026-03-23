@@ -4,6 +4,7 @@ import Events from "../components/Events";
 import Intro from "../components/Intro";
 import Bakery from "../components/Bakery";
 import MenuPreview from "../components/MenuPreview";
+import ImpressieCollage from "../components/ImpressieCollage";
 import Reviews from "../components/Reviews";
 import Info from "../components/Info";
 
@@ -14,8 +15,9 @@ export default function HomePage() {
       <Events />
       <Intro />
       <Bakery />
-      <MenuPreview />
       <Reviews />
+      <ImpressieCollage />
+      <MenuPreview />
       <Info />
     </>
   );

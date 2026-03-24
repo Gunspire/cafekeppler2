@@ -79,7 +79,7 @@ export default async function handler(req: any, res: any) {
 
   const from =
     process.env.RESEND_FROM || "Café Keppler <noreply@cafekeppler.nl>";
-  const toCompany = process.env.RESEND_TO || "kitzmann24@outlook.com";
+  const toCompany = process.env.RESEND_TO || "cafekepplernoord@gmail.com";
 
   const body = (req.body || {}) as Partial<Payload>;
   const firstName = safeStr(body.firstName).trim();

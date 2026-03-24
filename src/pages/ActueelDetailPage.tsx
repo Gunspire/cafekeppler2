@@ -5,6 +5,25 @@ import { getActueelBySlug, formatNl } from "../data/actueel";
 export default function ActueelDetailPage() {
   const { slug } = useParams();
   const item = slug ? getActueelBySlug(slug) : null;
+  const [posterOpen, setPosterOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    setPosterOpen(false);
+  }, [slug]);
+
+  React.useEffect(() => {
+    if (!posterOpen) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setPosterOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [posterOpen]);
 
   if (!item) {
     return (
@@ -68,6 +87,54 @@ export default function ActueelDetailPage() {
       <section className="section actueel" aria-label="Details">
         <div className="actueel__inner">
           <p className="actueel__lead">{item.excerpt}</p>
+          {item.showPosterLightbox ? (
+            <>
+              <figure className="actueel-poster">
+                <button
+                  type="button"
+                  className="actueel-poster__btn"
+                  onClick={() => setPosterOpen(true)}
+                  aria-haspopup="dialog"
+                  aria-expanded={posterOpen}
+                  aria-label={`${item.imageAlt} — open op volledige grootte`}
+                >
+                  <img
+                    src={item.imageSrc}
+                    alt=""
+                    className="actueel-poster__img"
+                    decoding="async"
+                  />
+                </button>
+                <figcaption className="actueel-poster__hint">
+                  Klik op de poster om groter te bekijken
+                </figcaption>
+              </figure>
+              {posterOpen ? (
+                <div
+                  className="actueel-lightbox"
+                  role="dialog"
+                  aria-modal="true"
+                  aria-label="Poster"
+                  onClick={() => setPosterOpen(false)}
+                >
+                  <button
+                    type="button"
+                    className="actueel-lightbox__close"
+                    onClick={() => setPosterOpen(false)}
+                    aria-label="Sluiten"
+                  >
+                    ×
+                  </button>
+                  <img
+                    src={item.imageSrc}
+                    alt={item.imageAlt}
+                    className="actueel-lightbox__img"
+                    onClick={(e) => e.stopPropagation()}
+                  />
+                </div>
+              ) : null}
+            </>
+          ) : null}
           {item.body.map((p, idx) => (
             <p key={idx} className="actueel__text">
               {p}

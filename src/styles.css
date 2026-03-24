@@ -1968,6 +1968,101 @@ a {
   margin-top: 18px;
 }
 
+.actueel-poster {
+  margin: 0 0 28px 0;
+  max-width: min(420px, 100%);
+}
+
+.actueel-poster__btn {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: zoom-in;
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.actueel-poster__btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.16);
+}
+
+.actueel-poster__btn:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.actueel-poster__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+
+.actueel-poster__hint {
+  display: block;
+  margin-top: 10px;
+  font-size: 14px;
+  color: color-mix(in srgb, var(--text) 62%, transparent);
+}
+
+.actueel-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 16px 16px;
+  background: rgba(18, 14, 12, 0.92);
+  cursor: zoom-out;
+  animation: actueelLightboxIn 0.2s ease;
+}
+
+@keyframes actueelLightboxIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.actueel-lightbox__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 999px;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+  transition: background 0.15s ease;
+}
+
+.actueel-lightbox__close:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.actueel-lightbox__img {
+  max-width: min(96vw, 900px);
+  max-height: 85vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  cursor: default;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+}
+
 /* Intro & Bakery Sections */
 .intro__inner,
 .bakery__inner {

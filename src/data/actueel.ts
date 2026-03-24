@@ -10,6 +10,8 @@ export type ActueelItem = {
   imageAlt: string;
   ribbon?: string;
   showOnHome?: boolean;
+  /** Toon poster in tekst + lightbox (bijv. muziekquiz). */
+  showPosterLightbox?: boolean;
   body: string[];
 };
 
@@ -59,34 +61,37 @@ export const ACTUEEL_ITEMS: ActueelItem[] = [
   },
   {
     slug: "keppler-klaverjassen",
-    title: "Keppler Klaverjassen",
+    title: "Spelletjesavond in Keppler",
     date: "2026-04-02",
     dateLabel: "Do 2 apr · 20:30",
     excerpt:
-      "Leer het spel bij ons in het café — laagdrempelig, met uitleg en een drankje erbij. Start om 20:30.",
+      "Spelletjesavond in het café — o.a. klaverjassen: laagdrempelig, met uitleg en een drankje erbij. Start om 20:30.",
     imageSrc:
       "/nieuw%20fotos/WhatsApp%20Image%202026-03-11%20at%2015.01.28.jpeg",
-    imageAlt: "Keppler Klaverjassen — spelletjesavond bij Café Keppler",
+    imageAlt: "Spelletjesavond in Keppler — klaverjassen bij Café Keppler",
     ribbon: "Leer het spel",
     body: [
-      "Nieuw met klaverjassen, of wil je je spel weer even opfrissen? Schuif aan bij Keppler Klaverjassen.",
+      "Spelletjesavond in Keppler draait om gezellig samen spelen — met deze editie de focus op klaverjassen. Nieuw met klaverjassen, of wil je je spel weer even opfrissen? Schuif aan.",
       "We leggen de basis rustig uit (spelverloop, punten en afspraken) en spelen vervolgens een paar ontspannen rondes.",
-      "De volgende klaverjasavond is op donderdag 2 april vanaf 20:30. Houd Actueel in de gaten voor volgende edities — of vraag ernaar aan de bar.",
+      "De volgende spelletjesavond is op donderdag 2 april vanaf 20:30. Houd Actueel in de gaten voor volgende edities — of vraag ernaar aan de bar.",
     ],
   },
   {
     slug: "muziekquiz",
     title: "Muziekquiz bij Keppler",
-    date: "2026-03-18",
+    date: "2026-04-15",
+    dateLabel: "Woensdag 15 april · 20:30",
     excerpt:
-      "Een gezellige avond met rondes vol herkenning, verrassingen en een klein prijsje voor de winnaars.",
-    imageSrc: "/pictures/Poster%20Muziekquiz.jpg",
-    imageAlt: "Poster van de Muziekquiz-avond bij Café Keppler",
+      "Woensdag 15 april: test je muziekkennis van guilty pleasures tot classics — teams, strijd om roem en een Keppler-voucher. Start 20:30.",
+    imageSrc: "/pictures/Poster%20Muziekquiz%20april.jpg",
+    imageAlt:
+      "Poster Muziekquiz-avond Café Keppler — woensdag 15 april 2026, start 20:30",
     ribbon: "Elke maand",
+    showPosterLightbox: true,
     body: [
       "Zin in een gezellige avond met vrienden? Doe mee met onze muziekquiz: rondes vol meezingers, guilty pleasures en verrassende classics.",
       "We spelen in teams, met korte pauzes tussendoor voor een drankje. Er is een klein prijsje voor de winnaars en natuurlijk vooral veel lol.",
-      "Wil je meedoen? Kom op tijd binnen zodat je rustig een tafel kunt vinden. Voor grotere groepen: stuur even een bericht via de contactpagina.",
+      "De eerstvolgende avond is woensdag 15 april; start om 20:30. Wil je meedoen? Kom op tijd binnen zodat je rustig een tafel kunt vinden. Voor grotere groepen: stuur even een bericht via de contactpagina.",
     ],
   },
   {
@@ -106,15 +111,15 @@ export const ACTUEEL_ITEMS: ActueelItem[] = [
   {
     slug: "buurtborrel",
     title: "Keppler buurtborrel",
-    date: "2026-03-15",
+    dateLabel: "Datum volgt binnenkort",
     excerpt:
-      "Een relaxed moment voor de buurt: borrelhap, lokale drankjes en fijne muziek. Meer info binnenkort.",
+      "Een relaxed moment voor de buurt: borrelhap, lokale drankjes en fijne muziek. De datum maken we binnenkort bekend.",
     imageSrc: SHARED_HERO_BACKGROUND_SLIDES[1].src,
     imageAlt: SHARED_HERO_BACKGROUND_SLIDES[1].alt,
     body: [
       "Een laagdrempelige borrel voor de buurt: even bijpraten, een drankje, iets lekkers en fijne muziek op de achtergrond.",
       "We zetten een kleine selectie borrelhappen klaar en zorgen voor een warme, ongedwongen sfeer.",
-      "Meer info volgt — houd de website in de gaten of vraag ernaar aan de bar.",
+      "De datum van de volgende buurtborrel volgt binnenkort — houd de website in de gaten of vraag ernaar aan de bar.",
     ],
   },
 ];

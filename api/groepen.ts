@@ -1,5 +1,6 @@
 import { Resend } from "resend";
-import { BUSINESS_INBOX } from "./mailConfig";
+
+const BUSINESS_INBOX = "cafekepplernoord@gmail.com";
 
 type Payload = {
   firstName: string;
@@ -82,7 +83,18 @@ export default async function handler(req: any, res: any) {
     process.env.RESEND_FROM || "Café Keppler <noreply@cafekeppler.nl>";
   const toCompany = BUSINESS_INBOX;
 
-  const body = (req.body || {}) as Partial<Payload>;
+  const rawBody = req.body;
+  const body = (
+    typeof rawBody === "string"
+      ? (() => {
+          try {
+            return JSON.parse(rawBody) as Partial<Payload>;
+          } catch {
+            return {};
+          }
+        })()
+      : rawBody || {}
+  ) as Partial<Payload>;
   const firstName = safeStr(body.firstName).trim();
   const lastName = safeStr(body.lastName).trim();
   const company = safeStr(body.company).trim();

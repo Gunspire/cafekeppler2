@@ -40,6 +40,9 @@ const DEFAULT_STATE: FormState = {
 
 export default function GroepenPage() {
   const [state, setState] = useState<FormState>(DEFAULT_STATE);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [submitted, setSubmitted] = useState(false);
 
   const mailtoHref = useMemo(() => {
     const to = "info@cafekeppler.nl";
@@ -82,6 +85,56 @@ export default function GroepenPage() {
       setState((s) => ({ ...s, [key]: e.target.value }));
     };
 
+  const onSubmit = async () => {
+    setError(null);
+    setSubmitted(false);
+    setBusy(true);
+    try {
+      const resp = await fetch("/api/groepen", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName: state.firstName.trim(),
+          lastName: state.lastName.trim(),
+          company: state.company.trim(),
+          people: state.people.trim(),
+          date: state.date,
+          time: state.time,
+          message: state.message.trim(),
+          type: state.type,
+          typeOther: state.typeOther.trim(),
+          email: state.email.trim(),
+          phone: state.phone.trim(),
+        }),
+      });
+
+      const rawText = await resp.text();
+      const data = ((): { ok?: boolean; error?: string } | null => {
+        try {
+          return rawText ? (JSON.parse(rawText) as any) : null;
+        } catch {
+          return null;
+        }
+      })();
+
+      if (!resp.ok) {
+        throw new Error(
+          data?.error ||
+            `Versturen mislukt (${resp.status}). ${
+              rawText && !data ? rawText.slice(0, 200) : "Probeer het opnieuw."
+            }`,
+        );
+      }
+
+      setSubmitted(true);
+      setState(DEFAULT_STATE);
+    } catch (e: any) {
+      setError(e?.message ? String(e.message) : "Er ging iets mis.");
+    } finally {
+      setBusy(false);
+    }
+  };
+
   return (
     <>
       <Hero />
@@ -116,7 +169,7 @@ export default function GroepenPage() {
             className="groups__form"
             onSubmit={(e) => {
               e.preventDefault();
-              window.location.href = mailtoHref;
+              onSubmit();
             }}
           >
             <div className="form-grid">
@@ -201,12 +254,13 @@ export default function GroepenPage() {
 
               {state.type === "Anders" ? (
                 <label className="field field--full">
-                  <span className="field__label">Anders, namelijk</span>
+                  <span className="field__label">Anders, namelijk *</span>
                   <input
                     className="field__input"
                     value={state.typeOther}
                     onChange={onChange("typeOther")}
                     placeholder="Bijv. reünie"
+                    required
                   />
                 </label>
               ) : null}
@@ -244,9 +298,16 @@ export default function GroepenPage() {
               </label>
             </div>
 
+            {error ? <div className="apply__error">{error}</div> : null}
+            {submitted ? (
+              <div className="apply__sent">
+                Bedankt! Je aanvraag is verstuurd. Je ontvangt zo een bevestiging per mail.
+              </div>
+            ) : null}
+
             <div className="groups__actions">
-              <button type="submit" className="btn btn--primary">
-                Verstuur aanvraag
+              <button type="submit" className="btn btn--primary" disabled={busy}>
+                {busy ? "Bezig…" : "Verstuur aanvraag"}
               </button>
               <a className="btn btn--secondary" href={mailtoHref}>
                 Open mail
@@ -258,4 +319,3 @@ export default function GroepenPage() {
     </>
   );
 }
-

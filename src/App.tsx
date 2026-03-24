@@ -13,12 +13,14 @@ import DinnerNotice from "./components/DinnerNotice";
 import NewDishSpotlight from "./components/NewDishSpotlight";
 import Footer from "./components/Footer";
 import ZenchefWidget from "./components/ZenchefWidget";
+import ScrollToTop from "./components/ScrollToTop";
 
 export default function App() {
   const location = useLocation();
 
   return (
     <main>
+      <ScrollToTop />
       <Header />
       <DinnerNotice />
       <NewDishSpotlight />

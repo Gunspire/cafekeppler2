@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react";
 import sollicitatieHandler from "./api/sollicitatie";
 import contactHandler from "./api/contact";
 import bestellingHandler from "./api/bestelling";
+import groepenHandler from "./api/groepen";
 import { kepplerSitemapPlugin } from "./vite-plugin-sitemap";
 
 // https://vitejs.dev/config/
@@ -56,6 +57,7 @@ export default defineConfig(({ mode }) => {
           mount("/api/sollicitatie", sollicitatieHandler as any);
           mount("/api/contact", contactHandler as any);
           mount("/api/bestelling", bestellingHandler as any);
+          mount("/api/groepen", groepenHandler as any);
         },
       },
     ],

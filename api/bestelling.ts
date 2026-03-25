@@ -1,4 +1,5 @@
 import { Resend } from "resend";
+import { COLOMBO_PASQUA } from "../src/data/colomboPasqua";
 
 const BUSINESS_INBOX = "cafekepplernoord@gmail.com";
 
@@ -86,6 +87,20 @@ function formatNlDate(pickupDate: string) {
   });
 }
 
+/** Kalenderdatum (YYYY-MM-DD) in Europe/Amsterdam — gelijk aan bestelperiode pop-up. */
+function amsterdamDateYmd(): string {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Europe/Amsterdam",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(new Date());
+  const y = parts.find((p) => p.type === "year")?.value;
+  const m = parts.find((p) => p.type === "month")?.value;
+  const d = parts.find((p) => p.type === "day")?.value;
+  return `${y}-${m}-${d}`;
+}
+
 export default async function handler(req: any, res: any) {
   if (req.method !== "POST") {
     res.setHeader?.("Allow", "POST");
@@ -159,6 +174,19 @@ export default async function handler(req: any, res: any) {
   if (!items.length && !notes) {
     sendJson(res, 400, { ok: false, error: "Kies minimaal 1 item of voeg opmerkingen toe." });
     return;
+  }
+
+  const hasColombo = items.some((i) => i.label.includes("Colombo di Pasqua"));
+  if (hasColombo) {
+    const today = amsterdamDateYmd();
+    if (today < COLOMBO_PASQUA.orderFrom || today > COLOMBO_PASQUA.orderUntil) {
+      sendJson(res, 400, {
+        ok: false,
+        error:
+          "Colombo di Pasqua is in deze periode niet meer via de site te bestellen. Bel voor de mogelijkheden: 020-7370838.",
+      });
+      return;
+    }
   }
 
   const pickupLine = pickupDate ? formatNlDate(pickupDate) : "-";

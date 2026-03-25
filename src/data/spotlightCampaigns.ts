@@ -1,3 +1,5 @@
+import { COLOMBO_PASQUA } from "./colomboPasqua";
+
 /**
  * Spotlight pop-ups: date rules + content.
  *
@@ -88,18 +90,22 @@ export const SPOTLIGHT_CAMPAIGNS: SpotlightCampaign[] = [
   },
   // Pasen — bestellen tot vrijdag 3 april 2026
   {
-    id: "pasqua-di-colombo-pasen-2026",
+    id: COLOMBO_PASQUA.campaignId,
     eyebrow: "Pasen · Bakkerij",
-    title: "Pasqua di Colombo",
+    title: COLOMBO_PASQUA.label,
     description:
-      "Met Pasen maken we een Pasqua di Colombo in een ronde vorm: qua structuur vergelijkbaar met panettone, maar doorgaans gevuld met gekonfijte sinaasappelschil, amandelen en parelsuiker. Heerlijk bij het ontbijt. Bestellen kan tot en met vrijdag 3 april via de website of bel naar",
+      "Met Pasen maken we een Colombo di Pasqua in een ronde vorm: qua structuur vergelijkbaar met panettone, maar doorgaans gevuld met gekonfijte sinaasappelschil, amandelen en parelsuiker. Heerlijk bij het ontbijt. Bestellen kan tot en met vrijdag 3 april via de website of bel naar",
     phone: { tel: "+31207370838", label: "020-7370838" },
     imageSrc:
       "/nieuw%20fotos/WhatsApp%20Image%202026-03-23%20at%2010.05.47.webp",
     imageAlt:
-      "Pasqua di Colombo — ronde Paastaart bij Café Keppler",
+      "Colombo di Pasqua — ronde Paastaart bij Café Keppler",
     badgeLabel: "Pasen",
-    schedule: { kind: "range", start: "2026-03-10", end: "2026-04-03" },
+    schedule: {
+      kind: "range",
+      start: COLOMBO_PASQUA.orderFrom,
+      end: COLOMBO_PASQUA.orderUntil,
+    },
   },
   // Tweede week van april — heeft voorrang boven de placeholder
   {

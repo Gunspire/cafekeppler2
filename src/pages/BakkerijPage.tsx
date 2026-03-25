@@ -1,4 +1,5 @@
 import React from "react";
+import { COLOMBO_PASQUA, COLOMBO_PASQUA_ORDER_LABEL } from "../data/colomboPasqua";
 
 export default function BakkerijPage() {
   type BestelState = {
@@ -7,6 +8,7 @@ export default function BakkerijPage() {
     phone: string;
     pickupDate: string;
     painGris: string;
+    colomboPasqua: string;
     noorsSpelt: string;
     deensRogge: string;
     foccaccia: string;
@@ -20,6 +22,7 @@ export default function BakkerijPage() {
     phone: "",
     pickupDate: "",
     painGris: "0",
+    colomboPasqua: "0",
     noorsSpelt: "0",
     deensRogge: "0",
     foccaccia: "0",
@@ -127,6 +130,26 @@ export default function BakkerijPage() {
   );
 
   const [lightboxIdx, setLightboxIdx] = React.useState<number | null>(null);
+
+  const todayYmd = React.useMemo(
+    () => fmtYmd(startOfDay(new Date())),
+    [],
+  );
+
+  const isColomboOrderActive =
+    todayYmd >= COLOMBO_PASQUA.orderFrom && todayYmd <= COLOMBO_PASQUA.orderUntil;
+
+  const colomboUntilNl = React.useMemo(() => {
+    const b = parseYmd(COLOMBO_PASQUA.orderUntil);
+    return b
+      ? b.toLocaleDateString("nl-NL", {
+          weekday: "long",
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+        })
+      : "";
+  }, []);
 
   React.useEffect(() => {
     if (lightboxIdx === null) return;
@@ -246,6 +269,18 @@ export default function BakkerijPage() {
             <div className="bakkerij__cardTitle">Alles wordt met zuurdesem gebakken</div>
             <ul className="bakkerij__list">
               <li>Pain Gris — tarwe, volkoren en rogge (€ 6,-)</li>
+              {isColomboOrderActive ? (
+                <li>
+                  {COLOMBO_PASQUA.label} — Paas-special (ronde cake, vergelijkbaar met panettone;{" "}
+                  {COLOMBO_PASQUA.priceLabel} per stuk). Bestellen t/m{" "}
+                  {parseYmd(COLOMBO_PASQUA.orderUntil)?.toLocaleDateString("nl-NL", {
+                    weekday: "long",
+                    day: "numeric",
+                    month: "long",
+                  })}{" "}
+                  — zie ook bestellijst hieronder.
+                </li>
+              ) : null}
               <li>Noors Speltbrood — met zuidvruchten, zaden en noten (€ 5,50)</li>
               <li>Deens Roggebrood — ovengebakken met venkel- en komijnzaad (€ 5,-)</li>
               <li>Foccaccia — tarwe, zeezout en olijfolie (€ 3,50)</li>
@@ -281,6 +316,14 @@ export default function BakkerijPage() {
             <p className="bakkerij__text">
               Afhalen kan van <strong>donderdag t/m zondag</strong>.
             </p>
+            {isColomboOrderActive ? (
+              <p className="bakkerij__text">
+                <strong>{COLOMBO_PASQUA.label}</strong> ({COLOMBO_PASQUA.priceLabel} per stuk) staat
+                op de bestellijst hieronder — zelfde actieperiode als de pop-up: je kunt{" "}
+                <strong>elke dag bestellen tot en met {colomboUntilNl}</strong>. Afhalen op een
+                donderdag t/m zondag die je kiest.
+              </p>
+            ) : null}
           </div>
 
           <form
@@ -309,6 +352,9 @@ export default function BakkerijPage() {
 
                 const items = [
                   { label: "Pain Gris", qty: toQty(bestel.painGris) },
+                  ...(isColomboOrderActive
+                    ? [{ label: COLOMBO_PASQUA_ORDER_LABEL, qty: toQty(bestel.colomboPasqua) }]
+                    : []),
                   { label: "Noors Speltbrood", qty: toQty(bestel.noorsSpelt) },
                   { label: "Deens Roggebrood", qty: toQty(bestel.deensRogge) },
                   { label: "Foccaccia", qty: toQty(bestel.foccaccia) },
@@ -555,6 +601,34 @@ export default function BakkerijPage() {
                       }
                     />
                   </label>
+                  {isColomboOrderActive ? (
+                    <label
+                      className={[
+                        "bakkerijBestel__item",
+                        !pickupMeta.ok ? "is-disabled" : null,
+                      ]
+                        .filter(Boolean)
+                        .join(" ")}
+                    >
+                      <span className="bakkerijBestel__itemLabel">
+                        {COLOMBO_PASQUA.label}{" "}
+                        <span className="bakkerijBestel__tag">
+                          {COLOMBO_PASQUA.priceLabel} · Pasen · do–zo
+                        </span>
+                      </span>
+                      <input
+                        className="field__input bakkerijBestel__qty"
+                        type="number"
+                        min={0}
+                        step={1}
+                        value={bestel.colomboPasqua}
+                        disabled={!pickupMeta.ok}
+                        onChange={(e) =>
+                          setBestel((s) => ({ ...s, colomboPasqua: e.target.value }))
+                        }
+                      />
+                    </label>
+                  ) : null}
                   <label
                     className={[
                       "bakkerijBestel__item",

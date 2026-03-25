@@ -1,5 +1,6 @@
 /**
  * Colombo di Pasqua — zelfde venster als de spotlight-pop-up (bestellen t/m 3 april).
+ * API-validatie gebruikt dezelfde datums in api/bestelling.ts (COLOMBO_ORDER_*); bij wijziging beide aanpassen.
  */
 export const COLOMBO_PASQUA = {
   campaignId: "pasqua-di-colombo-pasen-2026",

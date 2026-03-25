@@ -1,7 +1,10 @@
 import { Resend } from "resend";
-import { COLOMBO_PASQUA } from "../src/data/colomboPasqua";
 
 const BUSINESS_INBOX = "cafekepplernoord@gmail.com";
+
+/** Sync met src/data/colomboPasqua.ts — alleen hier dupliceren zodat Vercel geen import uit /src nodig heeft. */
+const COLOMBO_ORDER_FROM = "2026-03-10";
+const COLOMBO_ORDER_UNTIL = "2026-04-03";
 
 type Item = { label: string; qty: number };
 
@@ -179,7 +182,7 @@ export default async function handler(req: any, res: any) {
   const hasColombo = items.some((i) => i.label.includes("Colombo di Pasqua"));
   if (hasColombo) {
     const today = amsterdamDateYmd();
-    if (today < COLOMBO_PASQUA.orderFrom || today > COLOMBO_PASQUA.orderUntil) {
+    if (today < COLOMBO_ORDER_FROM || today > COLOMBO_ORDER_UNTIL) {
       sendJson(res, 400, {
         ok: false,
         error:
